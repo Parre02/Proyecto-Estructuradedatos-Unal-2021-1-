@@ -182,6 +182,53 @@ if(entradan1 == 1):
         else:
             print('jugada invalida')
 
+    def DTYaX(tupla, P, C, T, D):
+        Torre = str(input("Desde que torre de figuras? "))
+
+        columna = int(input("Hacia que columna? ")) - 1
+
+        if Torre == "P":
+            Torre = P
+        elif Torre == "C":
+            Torre = C
+        elif Torre == "T":
+            Torre = T
+        elif Torre == "D":
+            Torre = D
+        else:
+            return "Movimiento invalido"
+        
+        entero = Torre[-1].split('-')[0]
+        entero_1 = tupla[columna][-1].split('-')[0]
+
+        if entero == 'A':
+            entero = 1
+        elif entero == 'J':
+            entero = 11
+        elif entero == 'Q':
+            entero = 12
+        elif entero == 'K':
+            entero = 13 
+
+        if entero_1 == 'A':
+            entero_1 = 1
+        elif entero_1 == 'J':
+            entero_1 = 11
+        elif entero_1 == 'Q':
+            entero_1 = 12
+        elif entero_1 == 'K':
+            entero_1 = 13 
+
+        if len(Torre) == 0:
+            return "Movimiento invalido"
+        elif ('P' in Torre[-1] and 'P' in tupla[columna][-1]) or ('C' in Torre[-1] and 'C' in tupla[columna][-1]) or ('D' in Torre[-1] and 'D' in tupla[columna][-1]) or ('T' in Torre[-1] and 'T' in tupla[columna][-1]) or ('P' in Torre[-1] and 'T' in tupla[columna][-1]) or ('T' in Torre[-1] and 'P' in tupla[columna][-1]) or ('C' in Torre[-1] and 'D' in tupla[columna][-1]) or ('D' in Torre[-1] and 'C' in tupla[columna][-1]):
+            return "Movimiento invalido"
+        elif int(entero) != int(entero_1) - 1:
+            return "Movimiento invalido"
+        else:
+            tupla[columna].append(Torre.pop())
+
+
     print(f'El juego se inicializa \n Columnas 1-7 \n Columna 1 {b[-1]} Tiene {len(b)} cartas \n Columna 2 {c[-1]} Tiene {len(c)} cartas \n Columna 3 {d[-1]} Tiene {len(d)} cartas \n Columna 4 {e[-1]} Tiene {len(e)} cartas \n Columna 5 {f[-1]} Tiene {len(f)} cartas \n Columna 6 {g[-1]} Tiene {len(g)} cartas \n Columna 7 {h[-1]} Tiene {len(h)} cartas \n\n En las torres de figuras (P,C,T,D) no hay cartas \n\n En la cola de arrastre hay {Cola_de_arrastre_2[-1]}  \n\n Las picas y treboles son de color Negro, Los corazones y diamentes son de color Rojo' )
     print(a)
 
@@ -189,12 +236,6 @@ if(entradan1 == 1):
 
 elif(entradan1 == 2):
     print("Hasta luego ")
-
-for i in range(len(tupla)):
-    print(i+1, tupla[i])
-
-MoverCartas(tupla, tupla2)
-
 
 while(entradan1 == 1):
     Opcion = int(input())
