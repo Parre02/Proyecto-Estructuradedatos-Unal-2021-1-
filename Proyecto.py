@@ -103,9 +103,53 @@ if(entradan1 == 1):
             if(Reinicio == 1):
                 reiniciar_cola_ararste()
 
+    def MoverCartas(tupla, tupla2):
+        desde = int(input("Desde que columna desea mover las cartas? ")) - 1
+        hasta = int(input("A que columna desea moverlas? ")) - 1
+        N = str(input("Desde que elemento de la columna? "))
+        b_t = tuple(tupla[desde])
+        if len(tupla[desde]) == 0:
+            print("Movimiento invalido")
 
+        cont = 0
+        for i in b_t:
+            if i == N:
+                cont += 1
+                entero = i.split('-')[0]
+                entero_1 = tupla[hasta][-1].split('-')[0]
+                if entero == 'A':
+                    entero = 1
+                elif entero == 'J':
+                    entero = 11
+                elif entero == 'Q':
+                    entero = 12
+                elif entero == 'K':
+                    entero = 13 
+                
+                if entero_1 == 'A':
+                    entero_1 = 1
+                elif entero_1 == 'J':
+                    entero_1 = 11
+                elif entero_1 == 'Q':
+                    entero_1 = 12
+                elif entero_1 == 'K':
+                    entero_1 = 13 
 
-        
+                if ('P' in i and 'P' in tupla[hasta][-1]) or ('C' in i and 'C' in tupla[hasta][-1]) or ('D' in i and 'D' in tupla[hasta][-1]) or ('T' in i and 'T' in tupla[hasta][-1]) or ('P' in i and 'T' in tupla[hasta][-1]) or ('T' in i and 'P' in tupla[hasta][-1]) or ('C' in i and 'D' in tupla[hasta][-1]) or ('D' in i and 'C' in tupla[hasta][-1]):
+                    print("Movimiento invalido")
+                    break
+                if int(entero) > int(entero_1):
+                    print("Movimiento invalido")
+                    break
+                
+                if cont == 1:
+                    tupla[hasta].append(i)
+                    tupla2[hasta].append(i)
+                    tupla[desde].pop()
+                    tupla[desde].pop()
+                else:
+                    print("Movimiento invalido")
+
 
 
     print(f'El juego se inicializa \n Columnas 1-7 \n Columna 1 {b[-1]} Tiene {len(b)} cartas \n Columna 2 {c[-1]} Tiene {len(c)} cartas \n Columna 3 {d[-1]} Tiene {len(d)} cartas \n Columna 4 {e[-1]} Tiene {len(e)} cartas \n Columna 5 {f[-1]} Tiene {len(f)} cartas \n Columna 6 {g[-1]} Tiene {len(g)} cartas \n Columna 7 {h[-1]} Tiene {len(h)} cartas \n\n En las torres de figuras (P,C,T,D) no hay cartas \n\n En la cola de arrastre hay {Cola_de_arrastre_2[-1]}  \n\n Las picas y treboles son de color Negro, Los corazones y diamentes son de color Rojo' )
