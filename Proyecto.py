@@ -233,6 +233,85 @@ if(entradan1 == 1):
             tupla2[columna].append(Torre[-1])
             Torre.pop()
 
+    def arrastre_a_columna(Y):
+        carta = Cola_de_arrastre_2[-1]
+        columnas = {1:b, 2:c, 3:d, 4:e, 5:f, 6:g, 7:h}
+        destapadas = {1:b2, 2:c2, 3:d2, 4:e2, 5:f2, 6:g2, 7:h2}
+        
+        if Y > 7:
+            print('jugada invalida')
+        elif len(columnas[Y]) == 0 and carta[0] == 'K':
+            card = Cola_de_arrastre_2.pop()
+            columnas[Y].append(card)
+            destapadas[Y].append(card)
+        elif len(columnas[Y]) != 0:
+            carta_2 = columnas[Y][-1]
+            if (carta[-1] == 'D' or carta[-1] == 'C') and (carta_2[-1] == 'T' or carta_2[-1] == 'P'):
+                if carta[0] == 'K':
+                    print('jugada invalida')
+                elif carta[:2] == '10' and carta_2[0] == 'J':
+                    card = Cola_de_arrastre_2.pop()
+                    columnas[Y].append(card)
+                    destapadas[Y].append(card)
+                elif carta[0] == '9' and carta_2[:2] == '10':
+                    card = Cola_de_arrastre_2.pop()
+                    columnas[Y].append(card)
+                    destapadas[Y].append(card)
+                elif carta[0] == 'J' and carta_2[0] == 'Q':
+                    card = Cola_de_arrastre_2.pop()
+                    columnas[Y].append(card)
+                    destapadas[Y].append(card)
+                elif carta[0] == 'Q' and carta_2[0] == 'K':
+                    card = Cola_de_arrastre_2.pop()
+                    columnas[Y].append(card)
+                    destapadas[Y].append(card)
+                elif carta[0] == 'A' and carta_2[0] == '2':
+                    card = Cola_de_arrastre_2.pop()
+                    columnas[Y].append(card)
+                    destapadas[Y].append(card)
+                elif int(carta[0]) < 10 and carta_2[0] != 'K' and carta_2[0] != 'Q' and carta_2[0] != 'J' and carta_2[0] != 'A' and carta_2[:2] != '10':
+                    if int(carta_2[0]) == int(carta[0]) + 1:
+                        card = Cola_de_arrastre_2.pop()
+                        columnas[Y].append(card)
+                        destapadas[Y].append(card)
+                    else:
+                        print('jugada invalida')
+                else:
+                    print('jugada invalida')
+            elif (carta[-1] == 'T' or carta[-1] == 'P') and (carta_2[-1] == 'D' or carta_2[-1] == 'C'):
+                if carta[0] == 'K':
+                    print('jugada invalida')
+                elif carta[:2] == '10' and carta_2[0] == 'J':
+                    card = Cola_de_arrastre_2.pop()
+                    columnas[Y].append(card)
+                    destapadas[Y].append(card)
+                elif carta[0] == '9' and carta_2[:2] == '9':
+                    card = Cola_de_arrastre_2.pop()
+                    columnas[Y].append(card)
+                    destapadas[Y].append(card)
+                elif carta[0] == 'J' and carta_2[0] == 'Q':
+                    card = Cola_de_arrastre_2.pop()
+                    columnas[Y].append(card)
+                    destapadas[Y].append(card)
+                elif carta[0] == 'Q' and carta_2[0] == 'K':
+                    card = Cola_de_arrastre_2.pop()
+                    columnas[Y].append(card)
+                    destapadas[Y].append(card)
+                elif carta[0] == 'A' and carta_2[0] == '2':
+                    card = Cola_de_arrastre_2.pop()
+                    columnas[Y].append(card)
+                    destapadas[Y].append(card)
+                elif int(carta[0]) < 10 and carta_2[0] != 'K' and carta_2[0] != 'Q' and carta_2[0] != 'J' and carta_2[0] != 'A' and carta_2[:2] != '10':
+                    if int(carta_2[0]) == int(carta[0]) + 1:
+                        card = Cola_de_arrastre_2.pop()
+                        columnas[Y].append(card)
+                        destapadas[Y].append(card)
+                    else:
+                        print('jugada invalida')
+                else:
+                    print('jugada invalida')
+            else:
+                print('jugada invalida')
 
     print(f'El juego se inicializa \n Columnas 1-7 \n Columna 1 {b[-1]} Tiene {len(b)} cartas \n Columna 2 {c[-1]} Tiene {len(c)} cartas \n Columna 3 {d[-1]} Tiene {len(d)} cartas \n Columna 4 {e[-1]} Tiene {len(e)} cartas \n Columna 5 {f[-1]} Tiene {len(f)} cartas \n Columna 6 {g[-1]} Tiene {len(g)} cartas \n Columna 7 {h[-1]} Tiene {len(h)} cartas \n\n En las torres de figuras (P,C,T,D) no hay cartas \n\n En la cola de arrastre hay {Cola_de_arrastre_2[-1]}  \n\n Las picas y treboles son de color Negro, Los corazones y diamentes son de color Rojo' )
     print(a)
