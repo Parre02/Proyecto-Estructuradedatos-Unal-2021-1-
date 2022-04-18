@@ -238,7 +238,12 @@ if(entradan1 == 1):
         carta = Cola_de_arrastre_2[-1]
         columnas = {1:b, 2:c, 3:d, 4:e, 5:f, 6:g, 7:h}
         destapadas = {1:b2, 2:c2, 3:d2, 4:e2, 5:f2, 6:g2, 7:h2}
-        
+
+        if len(Cola_de_arrastre_2) == 0:
+            print('La cola de arrastre no esta destapada')
+            return
+        if len(Cola_de_arrastre_2) != 0:        
+            carta = Cola_de_arrastre_2[-1]
         if Y > 7:
             print('jugada invalida')
         elif len(columnas[Y]) == 0 and carta[0] == 'K':
@@ -347,7 +352,7 @@ while(entradan1 == 1):
         entradan1 = 2
         break
     elif(Opcion == 9):
-        for i in range(len(tupla2)): print(i+1, ' | '.join(tupla2[i]))
+        for i in range(len(tupla2)): print(i+1, ' | '.join(tupla2[i], "Tiene", len(tupla[i]), "Cartas"))
     else:
         print("Funcionalidad elegida invalida")
     # FUNCIONES A EJECUTAR 
