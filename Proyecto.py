@@ -1,6 +1,5 @@
 from collections import deque
 from random import randint
-from re import A
 
 
 
@@ -16,7 +15,7 @@ if(entradan1 == 1):
 
     a = deque()
     while True:
-        ran = randint(1, 52)
+        ran = randint(0, 51)
         if cartas[ran] not in a:
             a.append(cartas[ran])
         if len(a) == 52:
@@ -31,8 +30,8 @@ if(entradan1 == 1):
     g = deque()
     h = deque()
 
-    ## Columnas 1-7 del juego, filas cartas descubiertas
-    b1 = deque()
+    ## Columnas 1-7 del juego, filas cartas descubiertas, 
+    b2 = deque()
     c2 = deque()
     d2 = deque()
     e2 = deque()
@@ -40,10 +39,11 @@ if(entradan1 == 1):
     g2 = deque()
     h2 = deque()
 
+
     variable_con = False
 
     tupla = (b, c, d, e, f, g, h)
-
+    tupla2 = (b2, c2, d2, e2, f2, g2, h2)
     while len(a) != 24:
         if variable_con == False:
             b.append(a.pop())
@@ -65,6 +65,14 @@ if(entradan1 == 1):
     Cola_de_arrastre_2 = deque() ##SACAR DE AQUI!!!
     Cola_de_arrastre_2.append(Cola_de_arraste_1.pop())
     # Inicializacion torres de figuras
+
+    ## Columnas fantasmas, cartas boca arriba
+    b2.append(b[-1])
+    c2.append(c[-1])
+    d2.append(d[-1])
+    f2.append(f[-1])
+    g2.append(g[-1])
+    h2.append(h[-1])
 
     Torre_P = deque()
     Torre_C = deque()
@@ -113,10 +121,8 @@ elif(entradan1 == 2):
 
 
 while(entradan1 == 1):
-   
-
-   
     Opcion = int(input())
+    print(f'')
     if(Opcion == 1):
         destapar_cola_arraste()
     elif(Opcion == 2):
@@ -132,7 +138,7 @@ while(entradan1 == 1):
     elif(Opcion == 7):
         print()
     elif(Opcion == 8):
-        print()
+        break
     elif(Opcion == 9):
         print()
     else:
@@ -149,11 +155,5 @@ while(entradan1 == 1):
     #Llevar de Columna Y a Torre de figura X Simon
     #Llevar Z cartas de la Columna X a la columna Y Joelle
     #LLevar de la torrre de figura Y a columna X (Ver wtts ED - 11 abril monitor hablo) Joelle
-    #Teminar juego Simon
+    #Teminar juego Simon listo
     # Imprimir Tablero ## a hacer 
-
-
-
-
-
-
