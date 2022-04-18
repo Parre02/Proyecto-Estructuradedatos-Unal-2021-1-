@@ -68,6 +68,7 @@ if(entradan1 == 1):
     b2.append(b[-1])
     c2.append(c[-1])
     d2.append(d[-1])
+    e2.append(e[-1])
     f2.append(f[-1])
     g2.append(g[-1])
     h2.append(h[-1])
@@ -147,7 +148,7 @@ if(entradan1 == 1):
             tupla[hasta].append(i)
             tupla2[hasta].append(i)
             tupla[desde].pop()
-            tupla[desde].pop()
+            tupla2[desde].pop()
         else:
             print("Movimiento invalido")
 
@@ -233,7 +234,7 @@ if(entradan1 == 1):
             tupla2[columna].append(Torre[-1])
             Torre.pop()
 
-    def arrastre_a_columna(Y):
+    def arrastre_a_columna(Y): ##Funcionalidad N3 
         carta = Cola_de_arrastre_2[-1]
         columnas = {1:b, 2:c, 3:d, 4:e, 5:f, 6:g, 7:h}
         destapadas = {1:b2, 2:c2, 3:d2, 4:e2, 5:f2, 6:g2, 7:h2}
@@ -329,7 +330,9 @@ while(entradan1 == 1):
     elif(Opcion == 2):
         reiniciar_cola_ararste()
     elif(Opcion == 3):
-        print()
+        print("ingrese la columna, a la cual desea mover: ")
+        opcion3_input= int(input())
+        arrastre_a_columna(opcion3_input)
     elif(Opcion == 4):
         print("ingrese la torre, a la cual desea mover: ")
         n = input()
@@ -344,7 +347,7 @@ while(entradan1 == 1):
         entradan1 = 2
         break
     elif(Opcion == 9):
-        print()
+        for i in range(len(tupla2)): print(i+1, ' | '.join(tupla2[i]))
     else:
         print("Funcionalidad elegida invalida")
     # FUNCIONES A EJECUTAR 
