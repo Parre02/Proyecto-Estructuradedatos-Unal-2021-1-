@@ -81,12 +81,16 @@ if(entradan1 == 1):
 
     def reiniciar_cola_ararste(): ## Funcion 2 reiniciar cola
         longitud_cola_arraste_2 = len(Cola_de_arrastre_2)
-        iterador_cola_arraste_2 = longitud_cola_arraste_2
-        print("La cola de arraste se reincia")
-        while (iterador_cola_arraste_2 != 0):
-            Cola_de_arraste_1.append(Cola_de_arrastre_2.pop())
-            iterador_cola_arraste_2 -= 1
-        print(Cola_de_arraste_1)
+        longitud_cola_arraste = len(Cola_de_arraste_1)
+        if(longitud_cola_arraste == 0):
+            iterador_cola_arraste_2 = longitud_cola_arraste_2
+            print("La cola de arraste se reincia")
+            while (iterador_cola_arraste_2 != 0):
+                Cola_de_arraste_1.append(Cola_de_arrastre_2.pop())
+                iterador_cola_arraste_2 -= 1
+            print(Cola_de_arraste_1)
+        else:
+            print("Aun no se puede ejecutar esta funcionalidad")
 
     def destapar_cola_arraste(): ##Funcion 1 destapar cola
         longitud_cola_arraste = len(Cola_de_arraste_1)
@@ -94,14 +98,13 @@ if(entradan1 == 1):
             Carta_del_arraste = Cola_de_arraste_1.pop()
             print(f"La carta que salio es {Carta_del_arraste} ")
             Cola_de_arrastre_2.append(Carta_del_arraste)
-            print("Carta encima ")
         elif(longitud_cola_arraste == 0):
             print("Desea reinciar la cola de arraste? \n 1 para si, 2 para no ")
             Reinicio = int(input())
             if(Reinicio == 1):
                 reiniciar_cola_ararste()
 
-    def MoverCartas(tupla, tupla2):
+    def MoverCartas(tupla, tupla2): ## Funcion N6 Llevar Z cartas de la Columna X a la columna Y Joelle
         desde = int(input("Desde que columna desea mover las cartas? ")) - 1
         hasta = int(input("A que columna desea moverlas? ")) - 1
         N = str(input("Desde que elemento de la columna? "))
@@ -151,26 +154,24 @@ if(entradan1 == 1):
 
 
     print(f'El juego se inicializa \n Columnas 1-7 \n Columna 1 {b[-1]} Tiene {len(b)} cartas \n Columna 2 {c[-1]} Tiene {len(c)} cartas \n Columna 3 {d[-1]} Tiene {len(d)} cartas \n Columna 4 {e[-1]} Tiene {len(e)} cartas \n Columna 5 {f[-1]} Tiene {len(f)} cartas \n Columna 6 {g[-1]} Tiene {len(g)} cartas \n Columna 7 {h[-1]} Tiene {len(h)} cartas \n\n En las torres de figuras (P,C,T,D) no hay cartas \n\n En la cola de arrastre hay {Cola_de_arrastre_2[-1]}  \n\n Las picas y treboles son de color Negro, Los corazones y diamentes son de color Rojo' )
-    print(a)
+   ##print(a)
 
-    print(tupla)
+   ##print(tupla)
 
 elif(entradan1 == 2):
     print("Hasta luego ")
 
-for i in range(len(tupla)):
-    print(i+1, tupla[i])
 
-MoverCartas(tupla, tupla2)
+
 
 
 while(entradan1 == 1):
+    print(f'\nSolitario: \nQue desea hacer? \n\nOpciones: \n 1.Destapar cola de arraste \n 2.Reiniciar cola de arraste \n 3.Llevar de cola de arrastre a Columna Y \n 4.Llevar de cola de arrastre a Torre de figura X (P: Pica, C: Corazón, T: Trébol, D: Diamante \n 5.Llevar de Columna Y a Torre de figura X \n 6.Llevar Z cartas de la Columna X a la columna Y \n 7.LLevar de la torrre de figura Y a columna X \n 8.Teminar juego  \n 9.Imprimir Tablero  ')
     Opcion = int(input())
-    print(f'')
     if(Opcion == 1):
         destapar_cola_arraste()
     elif(Opcion == 2):
-        print()
+        reiniciar_cola_ararste()
     elif(Opcion == 3):
         print()
     elif(Opcion == 4):
@@ -178,7 +179,7 @@ while(entradan1 == 1):
     elif(Opcion == 5):
         print()
     elif(Opcion == 6):
-        print()
+        MoverCartas(tupla, tupla2)
     elif(Opcion == 7):
         print()
     elif(Opcion == 8):
