@@ -151,22 +151,99 @@ if(entradan1 == 1):
                 else:
                     print("Movimiento invalido")
 
+    def arrastre_a_torre(x): ## Funcionalidad n 3 arrastre de 
+        carta = Cola_de_arrastre_2[-1]
+        torres = {'P':Torre_P, 'C':Torre_C, 'T':Torre_T, 'D':Torre_D}
+
+        if carta[-1] == x:
+            if len(torres[x]) == 0:
+                if carta[0] == 'A':
+                    torres[x].append(Cola_de_arrastre_2.pop())
+                else:
+                    print('jugada invalida')
+            elif len(torres[x]) != 0:
+                carta_2 = torres[x][-1]
+                if carta[0] == 'A':
+                    print('jugada invalida')
+                elif carta[0] == '2' and carta_2[0] == 'A':
+                    torres[x].append(Cola_de_arrastre_2.pop())
+                elif carta[:2] == '10' and carta_2[0] == '9':
+                    torres[x].append(Cola_de_arrastre_2.pop())
+                elif carta[0] == 'J' and carta_2[:2] == '10':
+                    torres[x].append(Cola_de_arrastre_2.pop())
+                elif carta[0] == 'Q' and carta_2[0] == 'J':
+                    torres[x].append(Cola_de_arrastre_2.pop())
+                elif carta[0] == 'K' and carta_2[0] == 'Q':
+                    torres[x].append(Cola_de_arrastre_2.pop())
+                elif 2 < int(carta[0]) < 10 and carta_2[0] != 'K' and carta_2[0] != 'Q' and carta_2[0] != 'J' and carta_2[0] != 'A' and carta_2[:2] != '10':
+                    if int(carta_2[0]) == int(carta[0]) - 1:
+                        torres[x].append(Cola_de_arrastre_2.pop())
+                    else:
+                        print('jugada invalida')
+            else:
+                print('jugada invalida')
+        else:
+            print('jugada invalida')
+
+    def DTYaX(tupla, tupla2, P, C, T, D): ## Funcionalidad N 7
+        Torre = str(input("Desde que torre de figuras? "))
+
+        columna = int(input("Hacia que columna? ")) - 1
+
+        if Torre == "P":
+            Torre = P
+        elif Torre == "C":
+            Torre = C
+        elif Torre == "T":
+            Torre = T
+        elif Torre == "D":
+            Torre = D
+        else:
+            return "Movimiento invalido"
+        
+        entero = Torre[-1].split('-')[0]
+        entero_1 = tupla[columna][-1].split('-')[0]
+
+        if entero == 'A':
+            entero = 1
+        elif entero == 'J':
+            entero = 11
+        elif entero == 'Q':
+            entero = 12
+        elif entero == 'K':
+            entero = 13 
+
+        if entero_1 == 'A':
+            entero_1 = 1
+        elif entero_1 == 'J':
+            entero_1 = 11
+        elif entero_1 == 'Q':
+            entero_1 = 12
+        elif entero_1 == 'K':
+            entero_1 = 13 
+
+        if len(Torre) == 0:
+            return "Movimiento invalido"
+        elif ('P' in Torre[-1] and 'P' in tupla[columna][-1]) or ('C' in Torre[-1] and 'C' in tupla[columna][-1]) or ('D' in Torre[-1] and 'D' in tupla[columna][-1]) or ('T' in Torre[-1] and 'T' in tupla[columna][-1]) or ('P' in Torre[-1] and 'T' in tupla[columna][-1]) or ('T' in Torre[-1] and 'P' in tupla[columna][-1]) or ('C' in Torre[-1] and 'D' in tupla[columna][-1]) or ('D' in Torre[-1] and 'C' in tupla[columna][-1]):
+            return "Movimiento invalido"
+        elif int(entero) != int(entero_1) - 1:
+            return "Movimiento invalido"
+        else:
+            tupla[columna].append(Torre[-1])
+            tupla2[columna].append(Torre[-1])
+            Torre.pop()
 
 
     print(f'El juego se inicializa \n Columnas 1-7 \n Columna 1 {b[-1]} Tiene {len(b)} cartas \n Columna 2 {c[-1]} Tiene {len(c)} cartas \n Columna 3 {d[-1]} Tiene {len(d)} cartas \n Columna 4 {e[-1]} Tiene {len(e)} cartas \n Columna 5 {f[-1]} Tiene {len(f)} cartas \n Columna 6 {g[-1]} Tiene {len(g)} cartas \n Columna 7 {h[-1]} Tiene {len(h)} cartas \n\n En las torres de figuras (P,C,T,D) no hay cartas \n\n En la cola de arrastre hay {Cola_de_arrastre_2[-1]}  \n\n Las picas y treboles son de color Negro, Los corazones y diamentes son de color Rojo' )
-   ##print(a)
+    print(a)
 
-   ##print(tupla)
+    print(tupla)
 
 elif(entradan1 == 2):
     print("Hasta luego ")
 
-
-
-
-
 while(entradan1 == 1):
-    print(f'\nSolitario: \nQue desea hacer? \n\nOpciones: \n 1.Destapar cola de arraste \n 2.Reiniciar cola de arraste \n 3.Llevar de cola de arrastre a Columna Y \n 4.Llevar de cola de arrastre a Torre de figura X (P: Pica, C: Corazón, T: Trébol, D: Diamante \n 5.Llevar de Columna Y a Torre de figura X \n 6.Llevar Z cartas de la Columna X a la columna Y \n 7.LLevar de la torrre de figura Y a columna X \n 8.Teminar juego  \n 9.Imprimir Tablero  ')
+    print(f'\nSolitario: \nQue desea hacer? \n\nOpciones: \n 1.Destapar cola de arraste \n 2.Reiniciar cola de arraste \n 3.Llevar de cola de arrastre a Columna Y \n 4.Llevar de cola de arrastre a Torre de figura X (P: Pica, C: Corazón, T: Trébol, D: Diamante) \n 5.Llevar de Columna Y a Torre de figura X \n 6.Llevar Z cartas de la Columna X a la columna Y \n 7.LLevar de la torrre de figura Y a columna X \n 8.Teminar juego  \n 9.Imprimir Tablero  ')
     Opcion = int(input())
     if(Opcion == 1):
         destapar_cola_arraste()
@@ -175,14 +252,17 @@ while(entradan1 == 1):
     elif(Opcion == 3):
         print()
     elif(Opcion == 4):
-        print()
+        print("ingrese la torre, a la cual desea mover: ")
+        n = input()
+        arrastre_a_torre(n)
     elif(Opcion == 5):
         print()
     elif(Opcion == 6):
         MoverCartas(tupla, tupla2)
     elif(Opcion == 7):
-        print()
+        DTYaX(tupla, tupla2, Torre_P, Torre_C, Torre_T, Torre_D)
     elif(Opcion == 8):
+        entradan1 = 2
         break
     elif(Opcion == 9):
         print()
@@ -201,4 +281,4 @@ while(entradan1 == 1):
     #Llevar Z cartas de la Columna X a la columna Y Joelle
     #LLevar de la torrre de figura Y a columna X (Ver wtts ED - 11 abril monitor hablo) Joelle
     #Teminar juego Simon listo
-    # Imprimir Tablero ## a hacer 
+    #Imprimir Tablero ## a hacer 
