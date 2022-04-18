@@ -143,13 +143,13 @@ if(entradan1 == 1):
                     print("Movimiento invalido")
                     break
                 
-                if cont == 1:
-                    tupla[hasta].append(i)
-                    tupla2[hasta].append(i)
-                    tupla[desde].pop()
-                    tupla[desde].pop()
-                else:
-                    print("Movimiento invalido")
+        if cont == 1:
+            tupla[hasta].append(i)
+            tupla2[hasta].append(i)
+            tupla[desde].pop()
+            tupla[desde].pop()
+        else:
+            print("Movimiento invalido")
 
     def arrastre_a_torre(x): ## Funcionalidad n 3 arrastre de 
         carta = Cola_de_arrastre_2[-1]
@@ -341,7 +341,7 @@ while(entradan1 == 1):
     elif(Opcion == 5):
         print()
     elif(Opcion == 6):
-        MoverCartas(tupla, tupla2)
+        MoverCartas(tupla2, tupla)
     elif(Opcion == 7):
         DTYaX(tupla, tupla2, Torre_P, Torre_C, Torre_T, Torre_D)
     elif(Opcion == 8):
