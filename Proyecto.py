@@ -1,8 +1,6 @@
 from collections import deque
 from random import randint
 
-
-
 print("Bienvenido a solitario spider \n Desea jugar un nuevo juego? \n  1 para si \n  2 para no " )
 
 
@@ -138,7 +136,7 @@ if(entradan1 == 1):
                 if ('P' in i and 'P' in tupla[hasta][-1]) or ('C' in i and 'C' in tupla[hasta][-1]) or ('D' in i and 'D' in tupla[hasta][-1]) or ('T' in i and 'T' in tupla[hasta][-1]) or ('P' in i and 'T' in tupla[hasta][-1]) or ('T' in i and 'P' in tupla[hasta][-1]) or ('C' in i and 'D' in tupla[hasta][-1]) or ('D' in i and 'C' in tupla[hasta][-1]):
                     print("Movimiento invalido")
                     break
-                if int(entero) > int(entero_1):
+                if int(entero) != int(entero_1) - 1:
                     print("Movimiento invalido")
                     break
                 
@@ -160,8 +158,10 @@ if(entradan1 == 1):
 elif(entradan1 == 2):
     print("Hasta luego ")
 
+for i in range(len(tupla)):
+    print(i+1, tupla[i])
 
-
+MoverCartas(tupla, tupla2)
 
 
 while(entradan1 == 1):
