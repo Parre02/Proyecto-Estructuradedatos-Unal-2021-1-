@@ -148,7 +148,39 @@ if(entradan1 == 1):
                 else:
                     print("Movimiento invalido")
 
+    def arrastre_a_torre(x):
+        carta = Cola_de_arrastre_2[-1]
+        torres = {'P':Torre_P, 'C':Torre_C, 'T':Torre_T, 'D':Torre_D}
 
+        if carta[-1] == x:
+            if len(torres[x]) == 0:
+                if carta[0] == 'A':
+                    torres[x].append(Cola_de_arrastre_2.pop())
+                else:
+                    print('jugada invalida')
+            elif len(torres[x]) != 0:
+                carta_2 = torres[x][-1]
+                if carta[0] == 'A':
+                    print('jugada invalida')
+                elif carta[0] == '2' and carta_2[0] == 'A':
+                    torres[x].append(Cola_de_arrastre_2.pop())
+                elif carta[:2] == '10' and carta_2[0] == '9':
+                    torres[x].append(Cola_de_arrastre_2.pop())
+                elif carta[0] == 'J' and carta_2[:2] == '10':
+                    torres[x].append(Cola_de_arrastre_2.pop())
+                elif carta[0] == 'Q' and carta_2[0] == 'J':
+                    torres[x].append(Cola_de_arrastre_2.pop())
+                elif carta[0] == 'K' and carta_2[0] == 'Q':
+                    torres[x].append(Cola_de_arrastre_2.pop())
+                elif 2 < int(carta[0]) < 10 and carta_2[0] != 'K' and carta_2[0] != 'Q' and carta_2[0] != 'J' and carta_2[0] != 'A' and carta_2[:2] != '10':
+                    if int(carta_2[0]) == int(carta[0]) - 1:
+                        torres[x].append(Cola_de_arrastre_2.pop())
+                    else:
+                        print('jugada invalida')
+            else:
+                print('jugada invalida')
+        else:
+            print('jugada invalida')
 
     print(f'El juego se inicializa \n Columnas 1-7 \n Columna 1 {b[-1]} Tiene {len(b)} cartas \n Columna 2 {c[-1]} Tiene {len(c)} cartas \n Columna 3 {d[-1]} Tiene {len(d)} cartas \n Columna 4 {e[-1]} Tiene {len(e)} cartas \n Columna 5 {f[-1]} Tiene {len(f)} cartas \n Columna 6 {g[-1]} Tiene {len(g)} cartas \n Columna 7 {h[-1]} Tiene {len(h)} cartas \n\n En las torres de figuras (P,C,T,D) no hay cartas \n\n En la cola de arrastre hay {Cola_de_arrastre_2[-1]}  \n\n Las picas y treboles son de color Negro, Los corazones y diamentes son de color Rojo' )
     print(a)
