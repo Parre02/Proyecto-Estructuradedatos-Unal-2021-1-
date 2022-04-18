@@ -182,7 +182,7 @@ if(entradan1 == 1):
         else:
             print('jugada invalida')
 
-    def DTYaX(tupla, P, C, T, D):
+    def DTYaX(tupla, tupla2, P, C, T, D):
         Torre = str(input("Desde que torre de figuras? "))
 
         columna = int(input("Hacia que columna? ")) - 1
@@ -226,7 +226,9 @@ if(entradan1 == 1):
         elif int(entero) != int(entero_1) - 1:
             return "Movimiento invalido"
         else:
-            tupla[columna].append(Torre.pop())
+            tupla[columna].append(Torre[-1])
+            tupla2[columna].append(Torre[-1])
+            Torre.pop()
 
 
     print(f'El juego se inicializa \n Columnas 1-7 \n Columna 1 {b[-1]} Tiene {len(b)} cartas \n Columna 2 {c[-1]} Tiene {len(c)} cartas \n Columna 3 {d[-1]} Tiene {len(d)} cartas \n Columna 4 {e[-1]} Tiene {len(e)} cartas \n Columna 5 {f[-1]} Tiene {len(f)} cartas \n Columna 6 {g[-1]} Tiene {len(g)} cartas \n Columna 7 {h[-1]} Tiene {len(h)} cartas \n\n En las torres de figuras (P,C,T,D) no hay cartas \n\n En la cola de arrastre hay {Cola_de_arrastre_2[-1]}  \n\n Las picas y treboles son de color Negro, Los corazones y diamentes son de color Rojo' )
