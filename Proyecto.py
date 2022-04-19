@@ -5,6 +5,7 @@ print("Bienvenido a solitario spider \n Desea jugar un nuevo juego? \n  1 para s
 
 
 entradan1 = int(input())
+
 if(entradan1 == 1):
     cartas = ('A-P','2-P', '3-P', '4-P', '5-P', '6-P', '7-P', '8-P', '9-P', '10-P', 'J-P', 'Q-P', 'K-P', 
             'A-T', '2-T', '3-T', '4-T', '5-T', '6-T', '7-T', '8-T', '9-T', '10-T', 'J-T', 'Q-T', 'K-T',
@@ -115,10 +116,9 @@ if(entradan1 == 1):
 
         cont = 0
         for i in b_t:
+            entero = i.split('-')[0]
             if i == N:
-                cont += 1
-                entero = i.split('-')[0]
-                entero_1 = tupla[hasta][-1].split('-')[0]
+                cont += 1                
                 if entero == 'A':
                     entero = 1
                 elif entero == 'J':
@@ -126,8 +126,14 @@ if(entradan1 == 1):
                 elif entero == 'Q':
                     entero = 12
                 elif entero == 'K':
-                    entero = 13 
-                
+                    entero = 13
+
+                if len(tupla[hasta]) != 0:
+                    entero_1 = tupla[hasta][-1].split('-')[0]
+                else:
+                    entero_1 = 0
+
+
                 if entero_1 == 'A':
                     entero_1 = 1
                 elif entero_1 == 'J':
@@ -137,18 +143,28 @@ if(entradan1 == 1):
                 elif entero_1 == 'K':
                     entero_1 = 13 
 
-                if ('P' in i and 'P' in tupla[hasta][-1]) or ('C' in i and 'C' in tupla[hasta][-1]) or ('D' in i and 'D' in tupla[hasta][-1]) or ('T' in i and 'T' in tupla[hasta][-1]) or ('P' in i and 'T' in tupla[hasta][-1]) or ('T' in i and 'P' in tupla[hasta][-1]) or ('C' in i and 'D' in tupla[hasta][-1]) or ('D' in i and 'C' in tupla[hasta][-1]):
+                if len(tupla[hasta]) != 0:
+                    if ('P' in i and 'P' in tupla[hasta][-1]) or ('C' in i and 'C' in tupla[hasta][-1]) or ('D' in i and 'D' in tupla[hasta][-1]) or ('T' in i and 'T' in tupla[hasta][-1]) or ('P' in i and 'T' in tupla[hasta][-1]) or ('T' in i and 'P' in tupla[hasta][-1]) or ('C' in i and 'D' in tupla[hasta][-1]) or ('D' in i and 'C' in tupla[hasta][-1]):
+                        print("Movimiento invalido")
+                        break
+
+                if int(entero) != int(entero_1) - 1 and entero != 13:
                     print("Movimiento invalido")
                     break
-                if int(entero) != int(entero_1) - 1:
-                    print("Movimiento invalido")
-                    break
-            if cont == 1:
+            
+            if len(tupla[hasta]) == 0 and entero == 13 and cont == 1:
+                tupla[hasta].append(i)
+                tupla2[hasta].append(i)
+                tupla[desde].pop()
+                tupla2[desde].pop()
+            elif len(tupla[desde]) != 0 and entero != 13 and cont == 1:
                 tupla[hasta].append(i)
                 tupla2[hasta].append(i)
                 tupla[desde].pop()
                 tupla2[desde].pop()
         
+
+
         if cont == 0:
             print("Movimiento invalido")
 
@@ -294,7 +310,7 @@ if(entradan1 == 1):
                     card = Cola_de_arrastre_2.pop()
                     columnas[Y].append(card)
                     destapadas[Y].append(card)
-                elif carta[0] == '9' and carta_2[:2] == '9':
+                elif carta[0] == '9' and carta_2[:2] == '10':
                     card = Cola_de_arrastre_2.pop()
                     columnas[Y].append(card)
                     destapadas[Y].append(card)
@@ -332,7 +348,13 @@ elif(entradan1 == 2):
 
 while(entradan1 == 1):
     print(f'\nSolitario: \nQue desea hacer? \n\nOpciones: \n 1.Destapar cola de arraste \n 2.Reiniciar cola de arraste \n 3.Llevar de cola de arrastre a Columna Y \n 4.Llevar de cola de arrastre a Torre de figura X (P: Pica, C: Corazón, T: Trébol, D: Diamante) \n 5.Llevar de Columna Y a Torre de figura X \n 6.Llevar Z cartas de la Columna X a la columna Y \n 7.LLevar de la torrre de figura Y a columna X \n 8.Teminar juego  \n 9.Imprimir Tablero  ')
-    Opcion = int(input())
+    Opcion = str(input())
+    if Opcion == '1' or Opcion == '2' or Opcion == '3' or Opcion == '4' or Opcion == '5' or Opcion == '6' or Opcion == '7' or Opcion == '8' or Opcion == '9':
+        Opcion = int(Opcion)
+    else:
+        print("NO IDIOTA ASI NO ES.")
+        break
+    
     if(Opcion == 1):
         destapar_cola_arraste()
     elif(Opcion == 2):
@@ -348,7 +370,7 @@ while(entradan1 == 1):
     elif(Opcion == 5):
         print()
     elif(Opcion == 6):
-        MoverCartas(tupla2, tupla)
+        MoverCartas(tupla, tupla2)
     elif(Opcion == 7):
         DTYaX(tupla, tupla2, Torre_P, Torre_C, Torre_T, Torre_D)
     elif(Opcion == 8):
@@ -356,7 +378,15 @@ while(entradan1 == 1):
         print("Gracias por jugar hasta luego")
         break
     elif(Opcion == 9):
-        for i in range(len(tupla2)): print(i+1, ' | '.join(tupla2[i]), "Tiene", len(tupla[i]), "Cartas")
+        print(tuple(Torre_C), tuple(Torre_P), tuple(Torre_T), tuple(Torre_D))
+
+        if len(Cola_de_arrastre_2) != 0:
+            print(Cola_de_arrastre_2[-1])
+        else:
+            print("La cola de arrastre no esta destapada.")
+
+        for i in range(len(tupla2)): 
+            print(i+1, ' | '.join(tupla2[i]), "Tiene", len(tupla[i]), "Cartas")
     else:
         print("Funcionalidad elegida invalida")
     # FUNCIONES A EJECUTAR 
