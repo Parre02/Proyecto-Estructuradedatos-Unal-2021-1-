@@ -40,8 +40,6 @@ if(entradan1 == 1):
 
     variable_con = False
 
-    tupla = (b, c, d, e, f, g, h)
-    tupla2 = (b2, c2, d2, e2, f2, g2, h2)
     while len(a) != 24:
         if variable_con == False:
             b.append(a.pop())
@@ -63,6 +61,8 @@ if(entradan1 == 1):
     Cola_de_arrastre_2 = deque() ##SACAR DE AQUI!!!
     Cola_de_arrastre_2.append(Cola_de_arraste_1.pop())
     # Inicializacion torres de figuras
+    tupla = (b, c, d, e, f, g, h)
+    tupla2 = (b2, c2, d2, e2, f2, g2, h2)
 
     ## Columnas fantasmas, cartas boca arriba
     b2.append(b[-1])
@@ -350,9 +350,10 @@ while(entradan1 == 1):
         DTYaX(tupla, tupla2, Torre_P, Torre_C, Torre_T, Torre_D)
     elif(Opcion == 8):
         entradan1 = 2
+        print("Gracias por jugar hasta luego")
         break
     elif(Opcion == 9):
-        for i in range(len(tupla2)): print(i+1, ' | '.join(tupla2[i], "Tiene", len(tupla[i]), "Cartas"))
+        for i in range(len(tupla2)): print(i+1, ' | '.join(tupla2[i]), "Tiene", len(tupla[i]), "Cartas")
     else:
         print("Funcionalidad elegida invalida")
     # FUNCIONES A EJECUTAR 
