@@ -4,7 +4,15 @@ from random import randint
 print("Bienvenido a solitario spider \n Desea jugar un nuevo juego? \n  1 para si \n  2 para no " )
 
 
-entradan1 = int(input())
+entradan1 = input()
+
+if entradan1 == '1' or entradan1 == '2':
+    entradan1 = int(entradan1)
+else:
+    print("opcion invalida")
+    entradan1 = 2
+
+
 
 if(entradan1 == 1):
     cartas = ('A-P','2-P', '3-P', '4-P', '5-P', '6-P', '7-P', '8-P', '9-P', '10-P', 'J-P', 'Q-P', 'K-P', 
