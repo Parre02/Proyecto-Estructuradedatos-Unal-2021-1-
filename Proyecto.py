@@ -226,8 +226,12 @@ if(entradan1 == 1):
             Torre = D
         else:
             return "Movimiento invalido"
-        
-        entero = Torre[-1].split('-')[0]
+
+        if len(Torre) != 0:
+            entero = Torre[-1].split('-')[0]
+        else:
+            print("Movimiento invalido")
+            return
         entero_1 = tupla[columna][-1].split('-')[0]
 
         if entero == 'A':
@@ -249,11 +253,11 @@ if(entradan1 == 1):
             entero_1 = 13 
 
         if len(Torre) == 0:
-            return "Movimiento invalido"
+            print("Movimiento invalido")
         elif ('P' in Torre[-1] and 'P' in tupla[columna][-1]) or ('C' in Torre[-1] and 'C' in tupla[columna][-1]) or ('D' in Torre[-1] and 'D' in tupla[columna][-1]) or ('T' in Torre[-1] and 'T' in tupla[columna][-1]) or ('P' in Torre[-1] and 'T' in tupla[columna][-1]) or ('T' in Torre[-1] and 'P' in tupla[columna][-1]) or ('C' in Torre[-1] and 'D' in tupla[columna][-1]) or ('D' in Torre[-1] and 'C' in tupla[columna][-1]):
-            return "Movimiento invalido"
+            print("Movimiento invalido")
         elif int(entero) != int(entero_1) - 1:
-            return "Movimiento invalido"
+            print("Movimiento invalido")
         else:
             tupla[columna].append(Torre[-1])
             tupla2[columna].append(Torre[-1])
