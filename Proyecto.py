@@ -353,8 +353,8 @@ while(entradan1 == 1):
         Opcion = int(Opcion)
     else:
         print("NO IDIOTA ASI NO ES.")
-        break
-    
+        Opcion = 0
+
     if(Opcion == 1):
         destapar_cola_arraste()
     elif(Opcion == 2):
