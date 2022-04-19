@@ -121,7 +121,7 @@ if(entradan1 == 1):
             print("Movimiento invalido")
             return "Movimiento invalido"
         if(columna =='1' or columna =='2'or columna =='3' or columna =='4' or columna =='5' or columna =='6' or columna =='7'):
-            columna = int(columna)
+            columna = int(columna) - 1
             if(len(Torre) != 0 and len(tupla[columna])!= 0 ):
                 entero = Torre[-1].split('-')[0]
                 entero_1 = tupla[columna][-1].split('-')[0]
