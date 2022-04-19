@@ -4,7 +4,8 @@ from random import randint
 print("Bienvenido a solitario spider \n Desea jugar un nuevo juego? \n  1 para si \n  2 para no " )
 
 
-entradan1 = input()
+entradan1 = input("¿Que desea hacer? ")
+print('  ')
 
 if entradan1 == '1' or entradan1 == '2':
     entradan1 = int(entradan1)
@@ -519,8 +520,22 @@ while(entradan1 == 1):
         print("Gracias por jugar hasta luego")
         break
     elif(Opcion == 9):
-        print(tuple(Torre_C), tuple(Torre_P), tuple(Torre_T), tuple(Torre_D))
+        ImpTP = Torre_P
+        ImpTT = Torre_T
+        ImpTD = Torre_D
+        ImpTC = Torre_C
 
+        if len(ImpTP) == 0:
+            ImpTP = (0, '()')
+        if len(ImpTT) == 0:
+            ImpTT = (0, '()')
+        if len(ImpTD) == 0:
+            ImpTD = (0, '()')
+        if len(ImpTC) == 0:
+            ImpTC = (0, '()')
+
+        print(ImpTP[-1], ImpTT[-1], ImpTD[-1], ImpTC[-1])
+        
         if len(Cola_de_arrastre_2) != 0:
             print(Cola_de_arrastre_2[-1])
         else:
