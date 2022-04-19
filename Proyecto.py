@@ -61,9 +61,9 @@ if(entradan1 == 1):
     Cola_de_arraste_1 = a ## Fila de arraste!! 
     Cola_de_arrastre_2 = deque() ##SACAR DE AQUI!!!
     Cola_de_arrastre_2.append(Cola_de_arraste_1.pop())
+    tupla = [b, c, d, e, f, g, h]
     # Inicializacion torres de figuras
-    tupla = (b, c, d, e, f, g, h)
-    tupla2 = (b2, c2, d2, e2, f2, g2, h2)
+    tupla2 = [b2, c2, d2, e2, f2, g2, h2]
 
     ## Columnas fantasmas, cartas boca arriba
     b2.append(b[-1])
@@ -79,7 +79,7 @@ if(entradan1 == 1):
     Torre_T = deque()
     Torre_D = deque()
 
-
+    tupla3 = [Torre_P, Torre_C,Torre_T, Torre_D]
 
     def reiniciar_cola_ararste(): ## Funcion 2 reiniciar cola
         longitud_cola_arraste_2 = len(Cola_de_arrastre_2)
@@ -105,6 +105,116 @@ if(entradan1 == 1):
             Reinicio = int(input())
             if(Reinicio == 1):
                 reiniciar_cola_ararste()
+    def columna_Y_a_torrefigura(tupla, tupla2, P, C, T, D):
+        Torre = str(input("Hacia que torre de figuras? "))
+        columna = input("Desde que columna? ") 
+
+        if Torre == "P":
+            Torre = P
+        elif Torre == "C":
+            Torre = C
+        elif Torre == "T":
+            Torre = T
+        elif Torre == "D":
+            Torre = D
+        else:
+            print("Movimiento invalido")
+            return "Movimiento invalido"
+        if(columna =='1' or columna =='2'or columna =='3' or columna =='4' or columna =='5' or columna =='6' or columna =='7'):
+            columna = int(columna)
+            if(len(Torre) != 0 and len(tupla[columna])!= 0 ):
+                entero = Torre[-1].split('-')[0]
+                entero_1 = tupla[columna][-1].split('-')[0]
+                carta = tupla[columna][-1]
+
+                if entero == 'A':
+                    entero = 1
+                elif entero == 'J':
+                    entero = 11
+                elif entero == 'Q':
+                    entero = 12
+                elif entero == 'K':
+                    entero = 13 
+
+                if entero_1 == 'A':
+                    entero_1 = 1
+                elif entero_1 == 'J':
+                    entero_1 = 11
+                elif entero_1 == 'Q':
+                    entero_1 = 12
+                elif entero_1 == 'K':
+                    entero_1 = 13 
+
+                if len(carta) == 0:
+                    return "Movimiento invalido"
+                elif(carta[2] != 'P' or carta[2] != 'C' or carta[2] != 'T' or carta[2] != 'D' and carta[1] != 'A'):
+                    return "Movimiento invalido"
+                elif int(entero_1) != int(entero) + 1:
+                    return "Movimiento invalido"
+                else:
+                    if(carta[2] == 'P'):
+                        tupla3[0].append(carta)
+                        tupla2[columna].pop()
+                        tupla[columna].pop()
+                        tupla[columna].append(tupla2[columna][-1])
+                    elif(carta[2] == 'C'):
+                        tupla3[1].append(carta)
+                        tupla2[columna].pop()
+                        tupla[columna].pop()
+                        tupla[columna].append(tupla2[columna][-1])
+                    elif(carta[2] == 'T'):
+                        tupla3[2].append(carta)
+                        tupla2[columna].pop()
+                        tupla[columna].pop()
+                        tupla[columna].append(tupla2[columna][-1])
+                    elif(carta[2] == 'D'):
+                        tupla3[3].append(carta)
+                        tupla2[columna].pop()
+                        tupla[columna].pop()
+                        tupla[columna].append(tupla2[columna][-1])
+                    else:
+                        print("Movimiento invalido")
+                        return
+                    
+                    
+            elif(len(Torre) == 0 and len(tupla[columna])!= 0):
+                entero_1 = tupla[columna][-1]
+                if(entero_1[0] == 'A' ):
+                    if(entero_1[2] == 'P'):
+                        tupla3[0].append(entero_1)
+                        tupla2[columna].pop()
+                        tupla[columna].pop()
+                        tupla[columna].append(tupla2[columna][-1])
+                    elif(entero_1[2] == 'C'):
+                        tupla3[1].append(entero_1)
+                        tupla2[columna].pop()
+                        tupla[columna].pop()
+                        tupla[columna].append(tupla2[columna][-1])
+                    elif(entero_1[2] == 'T'):
+                        tupla3[2].append(entero_1)
+                        tupla2[columna].pop()
+                        tupla[columna].pop()
+                        tupla[columna].append(tupla2[columna][-1])
+                    elif(entero_1[2] == 'D'):
+                        tupla3[3].append(entero_1)
+                        tupla2[columna].pop()
+                        tupla[columna].pop()
+                        tupla[columna].append(tupla2[columna][-1])
+                    else:
+                        print("Movimiento invalido")
+                        return
+                else:
+                    print("Jugada invalida")
+                    return 
+            else:
+                print('Jugada invalida')
+                return
+        else:
+            print("Jugada invalida")
+            return
+
+
+
 
     def MoverCartas(tupla, tupla2): ## Funcion N6 Llevar Z cartas de la Columna X a la columna Y Joelle
         desde = int(input("Desde que columna desea mover las cartas? ")) - 1
@@ -339,9 +449,9 @@ if(entradan1 == 1):
                 print('jugada invalida')
 
     print(f'El juego se inicializa \n Columnas 1-7 \n Columna 1 {b[-1]} Tiene {len(b)} cartas \n Columna 2 {c[-1]} Tiene {len(c)} cartas \n Columna 3 {d[-1]} Tiene {len(d)} cartas \n Columna 4 {e[-1]} Tiene {len(e)} cartas \n Columna 5 {f[-1]} Tiene {len(f)} cartas \n Columna 6 {g[-1]} Tiene {len(g)} cartas \n Columna 7 {h[-1]} Tiene {len(h)} cartas \n\n En las torres de figuras (P,C,T,D) no hay cartas \n\n En la cola de arrastre hay {Cola_de_arrastre_2[-1]}  \n\n Las picas y treboles son de color Negro, Los corazones y diamentes son de color Rojo' )
-    print(a)
+   # print(a)
 
-    print(tupla)
+   # print(tupla)
 
 elif(entradan1 == 2):
     print("Hasta luego ")
@@ -368,7 +478,7 @@ while(entradan1 == 1):
         n = input()
         arrastre_a_torre(n)
     elif(Opcion == 5):
-        print()
+       columna_Y_a_torrefigura(tupla2,tupla,Torre_P,Torre_C,Torre_T,Torre_D)
     elif(Opcion == 6):
         MoverCartas(tupla, tupla2)
     elif(Opcion == 7):
@@ -403,3 +513,102 @@ while(entradan1 == 1):
     #LLevar de la torrre de figura Y a columna X (Ver wtts ED - 11 abril monitor hablo) Joelle
     #Teminar juego Simon listo
     #Imprimir Tablero ## a hacer 
+
+
+def columna_Y_a_torrefigura(tupla, tupla2, P, C, T, D):
+    Torre = str(input("Hacia que torre de figuras? "))
+    columna = int(input("Desde que columna? ")) - 1
+
+    if Torre == "P":
+        Torre = P
+    elif Torre == "C":
+        Torre = C
+    elif Torre == "T":
+        Torre = T
+    elif Torre == "D":
+        Torre = D
+    else:
+        print("Movimiento invalido")
+        return "Movimiento invalido"
+
+    if(len(Torre) != 0):
+        entero = Torre[-1].split('-')[0]
+        entero_1 = tupla[columna][-1].split('-')[0]
+        carta = tupla[columna][-1]
+
+        if entero == 'A':
+            entero = 1
+        elif entero == 'J':
+            entero = 11
+        elif entero == 'Q':
+            entero = 12
+        elif entero == 'K':
+            entero = 13 
+
+        if entero_1 == 'A':
+            entero_1 = 1
+        elif entero_1 == 'J':
+            entero_1 = 11
+        elif entero_1 == 'Q':
+            entero_1 = 12
+        elif entero_1 == 'K':
+            entero_1 = 13 
+
+        if len(entero_1) == 0:
+            return "Movimiento invalido"
+        elif(entero_1[1] != 'P' or entero_1[1] != 'C' or entero_1[1] != 'T' or entero_1[1] != 'D' and entero_1[0] != 'A'):
+            return "Movimiento invalido"
+        elif int(entero_1) != int(entero) + 1:
+            return "Movimiento invalido"
+        else:
+            if(carta[2] == 'P'):
+                tupla3[0].append(carta)
+                tupla[columna].pop()
+                tupla2[columna].append(tupla[columna][-1])
+            elif(carta[2] == 'C'):
+                tupla3[1].append(carta)
+                tupla[columna].pop()
+                tupla2[columna].append(tupla[columna][-1])
+            elif(carta[2] == 'T'):
+                tupla3[2].append(carta)
+                tupla[columna].pop()
+                tupla2[columna].append(tupla[columna][-1])
+            elif(carta[2] == 'D'):
+                tupla3[3].append(carta)
+                tupla[columna].pop()
+                tupla2[columna].append(tupla[columna][-1])
+            else:
+                print("Movimiento invalido")
+                return
+            
+            
+    elif(len(Torre) == 0):
+        entero_1 = tupla[columna][-1]
+        if(entero_1[0] == 'A' ):
+            if(entero_1[2] == 'P'):
+                tupla3[0].append(entero_1)
+                tupla[columna].pop()
+                tupla2[columna].append(tupla[columna][-1])
+            elif(entero_1[2] == 'C'):
+                tupla3[1].append(entero_1)
+                tupla[columna].pop()
+                tupla2[columna].append(tupla[columna][-1])
+            elif(entero_1[2] == 'T'):
+                tupla3[2].append(entero_1)
+                tupla[columna].pop()
+                tupla2[columna].append(tupla[columna][-1])
+            elif(entero_1[2] == 'D'):
+                tupla3[3].append(entero_1)
+                tupla[columna].pop()
+                tupla2[columna].append(tupla[columna][-1])
+            else:
+                print("Movimiento invalido")
+                return
+        else:
+            print("Jugada invalida")
+            return 
+
+
+
+
+columna_Y_a_torrefigura(tupla2,tupla,Torre_P,Torre_C,Torre_T,Torre_D)
