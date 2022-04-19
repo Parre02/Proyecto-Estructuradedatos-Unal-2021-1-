@@ -143,14 +143,17 @@ if(entradan1 == 1):
                 if int(entero) != int(entero_1) - 1:
                     print("Movimiento invalido")
                     break
-                
-        if cont == 1:
-            tupla[hasta].append(i)
-            tupla2[hasta].append(i)
-            tupla[desde].pop()
-            tupla2[desde].pop()
-        else:
+            if cont == 1:
+                tupla[hasta].append(i)
+                tupla2[hasta].append(i)
+                tupla[desde].pop()
+                tupla2[desde].pop()
+        
+        if cont == 0:
             print("Movimiento invalido")
+
+        if len(tupla2[desde]) == 0 and len(tupla[desde]) != 0:
+                tupla2[desde].append(tupla[desde][-1])
 
     def arrastre_a_torre(x): ## Funcionalidad n 3 arrastre de 
         carta = Cola_de_arrastre_2[-1]
