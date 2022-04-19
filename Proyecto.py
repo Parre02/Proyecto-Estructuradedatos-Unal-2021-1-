@@ -123,8 +123,8 @@ if(entradan1 == 1):
         if(columna =='1' or columna =='2'or columna =='3' or columna =='4' or columna =='5' or columna =='6' or columna =='7'):
             columna = int(columna) - 1
             if(len(Torre) != 0 and len(tupla[columna])!= 0 ):
-                entero = Torre[-1].split('-')[0]
-                entero_1 = tupla[columna][-1].split('-')[0]
+                entero_1 = Torre[-1].split('-')[0]
+                entero = tupla[columna][-1].split('-')[0]
                 carta = tupla[columna][-1]
 
                 if entero == 'A':
@@ -217,12 +217,22 @@ if(entradan1 == 1):
 
 
     def MoverCartas(tupla, tupla2): ## Funcion N6 Llevar Z cartas de la Columna X a la columna Y Joelle
-        desde = int(input("Desde que columna desea mover las cartas? ")) - 1
-        hasta = int(input("A que columna desea moverlas? ")) - 1
+        desde = input("Desde que columna desea mover las cartas? ")
+        hasta = input("A que columna desea moverlas? ")
         N = str(input("Desde que elemento de la columna? "))
-        b_t = tuple(tupla[desde])
+
+        if desde == '1' or desde == '2' or desde == '3' or desde == '4' or desde == '5' or desde == '6' or desde == '7' or hasta == '1' or hasta == '2' or hasta == '3' or hasta == '4' or hasta == '5' or hasta == '6' or hasta == '7':
+            desde = int(desde) - 1
+            hasta = int(hasta) - 1
+        else:
+            print("Movimiento invalido")
+            return
+
         if len(tupla[desde]) == 0:
             print("Movimiento invalido")
+            return
+
+        b_t = tuple(tupla[desde])
 
         cont = 0
         for i in b_t:
@@ -324,7 +334,10 @@ if(entradan1 == 1):
     def DTYaX(tupla, tupla2, P, C, T, D): ## Funcionalidad N 7
         Torre = str(input("Desde que torre de figuras? "))
 
-        columna = int(input("Hacia que columna? ")) - 1
+        columna = input("Hacia que columna? ")
+
+
+
 
         if Torre == "P":
             Torre = P
