@@ -172,8 +172,14 @@ if(entradan1 == 1):
                 tupla2[desde].append(tupla[desde][-1])
 
     def arrastre_a_torre(x): ## Funcionalidad n 3 arrastre de 
-        carta = Cola_de_arrastre_2[-1]
         torres = {'P':Torre_P, 'C':Torre_C, 'T':Torre_T, 'D':Torre_D}
+
+        if len(Cola_de_arrastre_2) == 0:
+            print('La cola de arrastre no esta destapada')
+            return
+        if len(Cola_de_arrastre_2) != 0:        
+            carta = Cola_de_arrastre_2[-1]
+        
 
         if carta[-1] == x:
             if len(torres[x]) == 0:
@@ -254,7 +260,6 @@ if(entradan1 == 1):
             Torre.pop()
 
     def arrastre_a_columna(Y): ##Funcionalidad N3 
-        carta = Cola_de_arrastre_2[-1]
         columnas = {1:b, 2:c, 3:d, 4:e, 5:f, 6:g, 7:h}
         destapadas = {1:b2, 2:c2, 3:d2, 4:e2, 5:f2, 6:g2, 7:h2}
 
@@ -383,7 +388,7 @@ while(entradan1 == 1):
         if len(Cola_de_arrastre_2) != 0:
             print(Cola_de_arrastre_2[-1])
         else:
-            print("La cola de arrastre no esta destapada.")
+            print("La cola de arraste no esta destapada")
 
         for i in range(len(tupla2)): 
             print(i+1, ' | '.join(tupla2[i]), "Tiene", len(tupla[i]), "Cartas")
