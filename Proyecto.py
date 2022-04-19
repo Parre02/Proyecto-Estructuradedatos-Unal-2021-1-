@@ -345,8 +345,11 @@ if(entradan1 == 1):
 
         columna = input("Hacia que columna? ")
 
-
-
+        if columna == '1' or columna == '2' or columna == '3' or columna == '4' or columna == '5' or columna == '6' or columna == '7':
+            columna = int(columna) - 1
+        else:
+            print("Movimiento invalido")
+            return
 
         if Torre == "P":
             Torre = P
