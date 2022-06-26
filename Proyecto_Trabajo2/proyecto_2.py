@@ -33,6 +33,7 @@ print('''                                                             ..',,;;;;;
 
 lista_cartas = ["R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "R9", "RB", "RC", "R2", "R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "R9", "RB", "RC", "R2", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "AB", "AC", "A2", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "AB", "AC", "A2", "V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "VB", "VC", "V2", "V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "VB", "VC", "V2", "Z1", "Z2", "Z3", "Z4", "Z5", "Z6", "Z7", "Z8", "Z9", "ZB", "ZC", "Z2", "Z1", "Z2", "Z3", "Z4", "Z5", "Z6", "Z7", "Z8", "Z9", "ZB", "ZC", "Z2"]
 
+# Busqueda de carta que pueda servir por turno.
 def BusquedaDeCarta(turno, cartaCentro, masoRestante):
     encontrada = False
     for carta in turno:
@@ -48,29 +49,39 @@ def BusquedaDeCarta(turno, cartaCentro, masoRestante):
         turno.append(masoRestante.pop())
         return -1
 
-
+# Funcion de cartas especiales
+# - C = cambio de sentido
+# - B = Bloqueo
+# - 2 = sumar dos cartas al siguiente
 
 def CartaEspecial(cartaCentro, turnos):
     global sentido
+    # B en este caso es para identificar si la carta es especial osea si contiene (C, B, 2)
+    # Cambio de sentido
     B = cartaCentro[-1]
-    if B[1] == 'C' and sentido == True:
+    if B[1] == 'C' and sentido == True: #Sentido horario
         sentido = False
-    elif B[1] == 'C' and sentido == False:
+    elif B[1] == 'C' and sentido == False: #Sentido Antihorario
         sentido = True
+    
+    # Bloqueo
 
+    # +2
 
-
-
+# Maso de de cartas donde esta la carta del centro
 maso = []
 
+# Cartas aleatorias
 random.shuffle(lista_cartas)
 
+# Turnos
 turnos = deque()
 turno_1 = []
 turno_2 = []
 turno_3 = []
 turno_4 = []
 
+# Identificar los turnos (se va a quitar despues) 
 turno_1.append("turno_1")
 turno_2.append("turno_2")
 turno_3.append("turno_3")
@@ -87,16 +98,19 @@ for AddCards in range(8):
     turno_3.append(lista_cartas.pop())
     turno_4.append(lista_cartas.pop())
 
+# maso agrega una carta aleatoria que es con la que se va a comenzar el juego
 maso.append(lista_cartas.pop())
 sentido = True
 while True:
+    # Si el maso de cartas restantes se queda en 0 este se reemplaza por el maso de cartas que no estas en posesion de ningun jugador
     if len(lista_cartas) == 0:
         Centro = maso.pop()
         lista_cartas = list(maso)
         maso = []
         maso.append(Centro)
-    entrada = str(input())
 
+    entrada = str(input())
+    
     BusquedaDeCarta(turnos[0], maso, lista_cartas)
     CartaEspecial(maso, turnos)
 
