@@ -72,7 +72,7 @@ def CartaEspecial(cartaCentro, turnos):
 maso = []
 
 # Cartas aleatorias
-random.shuffle(lista_cartas)
+random.shuffle(lista_cartas) # O(n*n)
 
 # Turnos
 turnos = deque()
@@ -106,6 +106,7 @@ while True:
     if len(lista_cartas) == 0:
         Centro = maso.pop()
         lista_cartas = list(maso)
+        random.shuffle(lista_cartas)
         maso = []
         maso.append(Centro)
 
