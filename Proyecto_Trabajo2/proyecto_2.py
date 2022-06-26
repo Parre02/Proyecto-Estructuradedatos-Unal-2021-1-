@@ -137,5 +137,7 @@ while True:
         turnos.appendleft(turnos.pop())
 
 # Faltante
+# JOSE
 # - Cartas especiales: +2, bloqueo
-# - Automatizar turnos
+# SIMON
+# - Automatizar turnos y randomizar
