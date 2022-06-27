@@ -95,26 +95,51 @@ sentido = True
 
 # Busqueda de carta que pueda servir por turno.
 def BusquedaDeCarta(turno, cartaCentro, masoRestante):
+    global acumulacion
     encontrada = False
-    for carta in turno:
-        if carta[0] == cartaCentro[-1][0] or carta[-1] == cartaCentro[-1][-1]:
-            cartaCentro.append(carta)
-            turno.remove(carta)
-            encontrada = True
+    if cartaCentro[-1][-1] == 'B':
+        for carta in turno:
+            if carta[-1] == cartaCentro[-1][-1]:
+                cartaCentro.append(carta)
+                turno.remove(carta)
+                encontrada = True
+                return 1
+        if encontrada == False:
             return 1
-    if encontrada == False and masoRestante[-1][0] == cartaCentro[-1][0] or masoRestante[-1][-1] == cartaCentro[-1][-1]:
-        cartaCentro.append(masoRestante.pop())
-        return 1
+    
+    if cartaCentro[-1][-1] == '+':
+        acumulacion += 2
+        for carta in turno:
+            if carta[-1] == cartaCentro[-1][-1]:
+                cartaCentro.append(carta)
+                turno.remove(carta)
+                encontrada = True
+                return 1
+        if encontrada == False:
+            for i in range(acumulacion):
+                turno.append(masoRestante.pop())
+            acumulacion = 0
+            return 1
     else:
-        turno.append(masoRestante.pop())
-        return -1
+        for carta in turno:
+            if carta[0] == cartaCentro[-1][0] or carta[-1] == cartaCentro[-1][-1]:
+                cartaCentro.append(carta)
+                turno.remove(carta)
+                encontrada = True
+                return 1
+        if encontrada == False and masoRestante[-1][0] == cartaCentro[-1][0] or masoRestante[-1][-1] == cartaCentro[-1][-1]:
+            cartaCentro.append(masoRestante.pop())
+            return 1
+        else:
+            turno.append(masoRestante.pop())
+            return -1
 
 # Funcion de cartas especiales
 # - C = cambio de sentido
 # - B = Bloqueo
 # - 2 = sumar dos cartas al siguiente
 
-def CartaEspecial(cartaCentro, turnos):
+def CambioDeSentido(cartaCentro, turnos):
     global sentido
     # B en este caso es para identificar si la carta es especial osea si contiene (C, B, 2)
     # Cambio de sentido
@@ -158,7 +183,7 @@ def verificarCartaTirar (masoCartasJugador, masoCentro,cartaTirar):
         return posiblejugadas
 
     else:
-        print("La carta no esta en el maso, favor coloque bien el dato")
+        print("La carta no esta en el maso, favor coloque bien el dato -.-''")
         
 
 
@@ -239,10 +264,11 @@ while True:
 
 
 
-
+    acumulacion  = 0 #acumulador para las cartas de +2
     print("Turno de la maquina")
+    
     BusquedaDeCarta(turnos[0], maso, lista_cartas)
-    CartaEspecial(maso, turnos)
+    CambioDeSentido(maso, turnos)
 
 
 
