@@ -97,12 +97,12 @@ sentido = True
 def BusquedaDeCarta(turno, cartaCentro, masoRestante):
     encontrada = False
     for carta in turno:
-        if carta[0] == cartaCentro[-1][0] or carta[1] == cartaCentro[-1][1]:
+        if carta[0] == cartaCentro[-1][0] or carta[-1] == cartaCentro[-1][-1]:
             cartaCentro.append(carta)
             turno.remove(carta)
             encontrada = True
             return 1
-    if encontrada == False and masoRestante[-1][0] == cartaCentro[-1][0] or masoRestante[-1][1] == cartaCentro[-1][1]:
+    if encontrada == False and masoRestante[-1][0] == cartaCentro[-1][0] or masoRestante[-1][-1] == cartaCentro[-1][-1]:
         cartaCentro.append(masoRestante.pop())
         return 1
     else:
