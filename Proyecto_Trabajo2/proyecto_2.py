@@ -97,7 +97,8 @@ sentido = True
 def BusquedaDeCarta(turno, cartaCentro, masoRestante):
     global acumulacion
     encontrada = False
-    if cartaCentro[-1][-1] == 'B':
+    #se priorisan bloqueos y +2
+    if cartaCentro[-1][-1] == 'B': 
         for carta in turno:
             if carta[-1] == cartaCentro[-1][-1]:
                 cartaCentro.append(carta)
@@ -117,6 +118,7 @@ def BusquedaDeCarta(turno, cartaCentro, masoRestante):
                 return 1
         if encontrada == False:
             for i in range(acumulacion):
+                VerificarListaDeArrastre()
                 turno.append(masoRestante.pop())
             acumulacion = 0
             return 1
@@ -134,11 +136,7 @@ def BusquedaDeCarta(turno, cartaCentro, masoRestante):
             turno.append(masoRestante.pop())
             return -1
 
-# Funcion de cartas especiales
-# - C = cambio de sentido
-# - B = Bloqueo
-# - 2 = sumar dos cartas al siguiente
-
+#funcion de cambio de sentido
 def CambioDeSentido(cartaCentro, turnos):
     global sentido
     # B en este caso es para identificar si la carta es especial osea si contiene (C, B, 2)
@@ -148,10 +146,6 @@ def CambioDeSentido(cartaCentro, turnos):
         sentido = False
     elif B[1] == 'C' and sentido == False: #Sentido Antihorario
         sentido = True
-    
-    # Bloqueo
-
-    # +2
 
 
 ##En esta funcion se verifica si el jugador puede arrastrar
@@ -185,7 +179,15 @@ def verificarCartaTirar (masoCartasJugador, masoCentro,cartaTirar):
     else:
         print("La carta no esta en el maso, favor coloque bien el dato -.-''")
         
-
+def VerificarListaDeArrastre():
+    global lista_cartas
+    global maso
+    global Centro
+    if len(lista_cartas) == 0:
+        Centro = maso.pop()
+        lista_cartas = list(maso)
+        maso = []
+        maso.append(Centro)
 
 
 
@@ -242,6 +244,7 @@ while True:
                 print("\nQue carta desea tirar?")
                 varCartaTirar = str(input())
                 masoCartasJugador = turnos[0]
+                ##Para poder tirar elegir el indice
                 
                 varPosibleJugadas = verificarCartaTirar(masoCartasJugador,maso,varCartaTirar)
 
