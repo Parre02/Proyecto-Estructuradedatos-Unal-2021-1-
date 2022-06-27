@@ -196,7 +196,6 @@ while True:
     if len(lista_cartas) == 0:
         Centro = maso.pop()
         lista_cartas = list(maso)
-        random.shuffle(lista_cartas)
         maso = []
         maso.append(Centro)
     
