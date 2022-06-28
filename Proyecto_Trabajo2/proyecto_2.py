@@ -117,7 +117,7 @@ cartas = {"RC":("+_________+", "|     Rojo|", "|         |", "|     />  |", "|  
 
 "A7":("+_________+", "|7Amarillo|", "|         |", "|         |", "|    7    |", "|         |", "|        7|", "+---------+"), 
 
-"Z7":("+_________+", "|7   Verde|", "|         |", "|         |", "|    7    |", "|         |", "|        7|", "+---------+"), 
+"V7":("+_________+", "|7   Verde|", "|         |", "|         |", "|    7    |", "|         |", "|        7|", "+---------+"), 
 
 "R8":("+_________+", "|8    Rojo|", "|         |", "|         |", "|    8    |", "|         |", "|        8|", "+---------+"), 
 
@@ -227,8 +227,10 @@ def BusquedaDeCarta(turno, cartaCentro, masoRestante):
                 return 1
         if encontrada == False and masoRestante[-1][0] == cartaCentro[-1][0] or masoRestante[-1][-1] == cartaCentro[-1][-1]:
             cartaCentro.append(masoRestante.pop())
+            print("De las cartas restantes se ha tomado una carta automaticamente y como esta carta es valida se puso en el centro.")
             return 1
         else:
+            print("Se ha tomado una carta automaticamente de las cartas restantes y se te agrego a tu maso.")
             turno.append(masoRestante.pop())
             return -1
 
@@ -243,37 +245,6 @@ def CambioDeSentido(cartaCentro):
     elif B[1] == 'C' and sentido == False: #Sentido Antihorario
         sentido = True
 
-
-##En esta funcion se verifica si el jugador puede arrastrar
-def verificarArrastre (masoCartasJugador, MasoCentro):
-    posiblejugadas = []
-
-    for i in range(len(masoCartasJugador)):
-        if MasoCentro[-1][0] == masoCartasJugador[i][0]:
-            posiblejugadas.append(masoCartasJugador[i])
-        elif MasoCentro[-1][1] == masoCartasJugador[i][1]:
-            posiblejugadas.append(masoCartasJugador[i])
-    if len(posiblejugadas) != 0:
-        return False
-    else:
-        return True
-
-def verificarCartaTirar (masoCartasJugador, masoCentro,cartaTirar):
-    ##Se verifica si existe la carta que deseo tirar en el maso y se realizan las comparaciones para tirar
-    posiblejugadas = []
-
-    if cartaTirar in masoCartasJugador:
-        print("La carta esta en el maso")
-        
-        for i in range(len(masoCartasJugador)):
-            if masoCentro[-1][0] == masoCartasJugador[i][0]:
-                posiblejugadas.append(masoCartasJugador(i))
-            elif masoCentro[-1][1] == masoCartasJugador[i][1]:
-                posiblejugadas.append(masoCartasJugador(i))
-        return posiblejugadas
-    else:
-        print("La carta no esta en el maso, favor coloque bien el dato -.-")
-        return
         
 def VerificarListaDeArrastre():
     global lista_cartas
@@ -284,7 +255,6 @@ def VerificarListaDeArrastre():
         lista_cartas = list(maso)
         maso = []
         maso.append(Centro)
-
 
 
 while True:
@@ -302,10 +272,10 @@ while True:
         if turnos[0] == turno_1:
             print("Menu del jugador")
             print("Opciones:")
-            print(" 1.Ver cartas en mi maso")
-            print(" 2.Arrastrar")
-            print(" 3.Ver la carta del centro")
-            print(" 4.Tirar carta")
+            print("  1.Ver cartas en mi maso")
+            print("  2.Ver la carta del centro")
+            print("  3.Tirar carta")
+            print(" ")
 
             entrada = int(input("Elija la opcion con un entero: "))
 
@@ -323,15 +293,6 @@ while True:
                 print("    ", "                 ".join(indices))
                 print(" ")
             elif entrada == 2:
-                verificarPosibleArrastre = False
-                verificarPosibleArrastre = verificarArrastre(turnos[0],maso)
-                if verificarPosibleArrastre == True and verificarSiSeArrastro == False:
-                    print("Se ha arrastrado una carta")
-                    turnos[0].add(lista_cartas.pop(-1))
-                    verificarSiSeArrastro = True
-                else:
-                    print("Aun no se puede arrastrar tienes movimiento posibles o ya arrastraste")
-            elif entrada == 3:
                 print(' CARTAS DEL CENTRO ')
                 print(" ")
                 print(" ")
@@ -339,35 +300,20 @@ while True:
                     print(i)
                 print(" ")
                 print(" ")
-            elif entrada == 4:
-
-                ##Aqui da errores revisar aun falta hacer el filtro mejor
-                print("\nImportante las Cartas que empiezan con Z al comienzo son las azules")
-                print("Las cartas que por ejemplo son RB, RC, R2+ corresponden a la primera letra el color R = Rojo y en la segunda letra \n B = Cancelar el proximo jugador \n C = Cambio de Sentido \n 2+ es igual a +2")
+            elif entrada == 3:
+                print("Para escoger una carta cuando imprime el maso de cartas que le corresponde a cada\ncarta se le asigna un indice, debe escribir el indice de la carta que desea escoger.\n Si no encuentra un indice coloque cualquier numero")
                 print("\nQue carta desea tirar?")
-                varCartaTirar = str(input())
-                masoCartasJugador = turnos[0]
-                ##Para poder tirar elegir el indice
-                
-                varPosibleJugadas = verificarCartaTirar(masoCartasJugador,maso,varCartaTirar)
-
-                if len(varPosibleJugadas) != 0:
-                    verificarPosibleJugada = True
-
-                if verificarPosibleJugada == False:
-                    print("Movimiento Invalido")
+                varCartaTirar = int(input())
+                if maso[-1][0] == turnos[0][varCartaTirar-1][0] or maso[-1][-1] == turnos[0][varCartaTirar-1][-1]:
+                    maso.append(turnos[0].pop(varCartaTirar-1))
+                    break
                 else:
-                    print("Se ha tirado la carta al centro")
-
-                    for i in range(turnos[0]):
-                        if varCartaTirar == turnos[0][i]:
-                            del(turnos[0][i])
-                            break
+                    print("Movimiento invalido")
+                    print("Se ha movido una carta valida automaticamente")
+                    BusquedaDeCarta(turnos[0], maso, lista_cartas)
                     break
         else:
             break
-
-
 
     acumulacion  = 0 #acumulador para las cartas de +2
     print("Turno de la maquina \n")
@@ -377,16 +323,7 @@ while True:
     CambioDeSentido(maso)
 
 
-
-
-
-   
-
-
-
-    
-
-    if len(turnos[0]) == 1:
+    if len(turnos[0]) == 0:
         break
 
 
