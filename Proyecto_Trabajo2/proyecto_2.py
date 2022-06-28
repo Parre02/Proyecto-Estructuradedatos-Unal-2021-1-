@@ -1,36 +1,139 @@
 import random
 from collections import deque
-from xmlrpc.client import Boolean
 
-print('''                                                             ..',,;;;;;,,'..
-                                                         ..',;;;;;;;;;;;;;;;;;;;,;;;:::,.
-                                                    ..';;;;;;;;;;;;;;;;;;;;;;oOOxoooooooodkx;
-                                                 .,;;;;;;;;;;;;;;;;;;;;;;;cO0lcoOXXKKKKKX0dccOd
-                                             ..,;;;;;;;;;;;;;;;;;;coxo;;lKk,lKKKKKKKKKKKKKKKKo;0l
-                                           .,;;;;;;;;;;;;;;;;cdkOkol,Nd00..KKKKKX0dc;;cdKKKKKKK:dO
-                                        .';;;;;;;;;;;;;;;;;l0k,clkKXO'Wc .XKKKKO'       .;0KKKKXcoO
-                                      .,;;;;;;;;;;:ld:;;;:0k'.',XKKKXl.  OKKKK0 ;ll:. .,;,.OKKKKX,0,
-                                    .,;;;;;;;:oxOkxolx0x:cN.';;.oKKKKX.  NKKKX:x0c:lk0,.,.  KKKKK0,X
-                                   ,;;;;:oxOkd:,ld0XXkcck0KK ,.  0KKKKK  NKKKXcxk;;;;:K: .' oKKKKN.M
-                                 .;;;:kOolllx0. 0KKKKKKXkcckd .' .XKKKKk KKKKKK.Nc;;;;:W..  oKKKKN.N
-                              ..,;;:k0;..KKKKKK .XKKKKKKKKXkc.    :XKKKX:;XKKKKk,Kd;;;;K:  .XKKKKk::
-                         .:dxxlOx;;00 ,;'.XKKKKx :XKKKKXKKKKKXk:   xKKKKX.oXKKKK0:lkOO0O. cKKKKKX.O
-                      'OxllloOK.Xl;:W,',. cXKKKX; kKKKKNdkXKKKKKXx;.KKKKK0 cXKKKKKKxlllokXKKKKKK'x 
-                    .Ox. .XKKKKk'N:;oN. .' kKKKKX. KKKKK0 .cOXKKKKKXKXKKKKd .dXKKKKKKKKKKKKKKKl'c
-                    ol    :XKKKXco0;;OO..   XKKKK0 'XKKKKd   .cOXKKKKKKKKKX,   :xKXKKKKKXX0d; o
-                     K.    xKKKKX.0d;;Nc    'XKKKKo oXKKKX,     .l0XKKKKKKKX.     .';;;,.   l
-                      0     KKKKK0.Nc;cW.    oKKKKX. 0KKKKX        .l0XKKKKKO           .c.
-                      ;o   .'XKKKKd;X;;xX     KKKKKO .XKKKKO.d'       .o0Kko:.OOxdoodxk.
-                       k' ,;.lKKKKX,xk;;Kx    dKKKKN  ;XKKKXllM0d.          cKd;;:::;'
-                        N.,;. OKKKKX.Ok;:W'   KKKKKN   xKKKKX,0kck0o.  .,lx0d;;;;;;;
-                        .k  .'.KKKKKXc:ddO. ;0KKKKKd    KXOdc.:W:;;lkOOkdc;;;;;;;;
-                         c:..  .0KKKKKXOxxOXKKKKKXd.        'OOc;;;;;;;;;;;;;;;;
-                          x.     oXKKKKKKKKKKKKKd;xW'   'cxOOc;;;;;;;;;;;;;;;'
-                           l,     .ckKXXXXX0xl,.oKolXxkOxl;;;;;;;;;;;;;;;;;
-                             x.        ...   .oKo;;;;;;;;;;;;;;;;;;;;;;;
-                               c;.       .,oOOl;;;;;;;;;;;;;;;;;;;;;
-                                    lxxkOkoc;;;;;;;;;;;;;;;;;;;.
-                                         ';;;;;;;;;;;;;;,  ''')
+print('''                                                                ..',,;;;;;,,'..
+                                                             ..',;;;;;;;;;;;;;;;;;;;,;;;:::,.
+                                                        ..';;;;;;;;;;;;;;;;;;;;;;oOOxoooooooodkx;
+                                                     .,;;;;;;;;;;;;;;;;;;;;;;;cO0lcoOXXKKKKKX0dccOd
+                                                 ..,;;;;;;;;;;;;;;;;;;coxo;;lKk,lKKKKKKKKKKKKKKKKo;0l
+                                               .,;;;;;;;;;;;;;;;;cdkOkol,Nd00..KKKKKX0dc;;cdKKKKKKK:dO
+                                            .';;;;;;;;;;;;;;;;;l0k,clkKXO'Wc .XKKKKO'       .;0KKKKXcoO
+                                          .,;;;;;;;;;;:ld:;;;:0k'.',XKKKXl.  OKKKK0 ;ll:. .,;,.OKKKKX,0,
+                                        .,;;;;;;;:oxOkxolx0x:cN.';;.oKKKKX.  NKKKX:x0c:lk0,.,.  KKKKK0,X
+                                       ,;;;;:oxOkd:,ld0XXkcck0KK ,.  0KKKKK  NKKKXcxk;;;;:K: .' oKKKKN.M
+                                     .;;;:kOolllx0. 0KKKKKKXkcckd .' .XKKKKk KKKKKK.Nc;;;;:W..  oKKKKN.N
+                                  ..,;;:k0;..KKKKKK .XKKKKKKKKXkc.    :XKKKX:;XKKKKk,Kd;;;;K:  .XKKKKk::
+                             .:dxxlOx;;00 ,;'.XKKKKx :XKKKKXKKKKKXk:   xKKKKX.oXKKKK0:lkOO0O. cKKKKKX.O
+                          'OxllloOK.Xl;:W,',. cXKKKX; kKKKKNdkXKKKKKXx;.KKKKK0 cXKKKKKKxlllokXKKKKKK'x 
+                        .Ox. .XKKKKk'N:;oN. .' kKKKKX. KKKKK0 .cOXKKKKKXKXKKKKd .dXKKKKKKKKKKKKKKKl'c
+                        ol    :XKKKXco0;;OO..   XKKKK0 'XKKKKd   .cOXKKKKKKKKKX,   :xKXKKKKKXX0d; o
+                         K.    xKKKKX.0d;;Nc    'XKKKKo oXKKKX,     .l0XKKKKKKKX.     .';;;,.   l
+                          0     KKKKK0.Nc;cW.    oKKKKX. 0KKKKX        .l0XKKKKKO           .c.
+                          ;o   .'XKKKKd;X;;xX     KKKKKO .XKKKKO.d'       .o0Kko:.OOxdoodxk.
+                           k' ,;.lKKKKX,xk;;Kx    dKKKKN  ;XKKKXllM0d.          cKd;;:::;'
+                            N.,;. OKKKKX.Ok;:W'   KKKKKN   xKKKKX,0kck0o.  .,lx0d;;;;;;;
+                            .k  .'.KKKKKXc:ddO. ;0KKKKKd    KXOdc.:W:;;lkOOkdc;;;;;;;;
+                             c:..  .0KKKKKXOxxOXKKKKKXd.        'OOc;;;;;;;;;;;;;;;;
+                              x.     oXKKKKKKKKKKKKKd;xW'   'cxOOc;;;;;;;;;;;;;;;'
+                               l,     .ckKXXXXX0xl,.oKolXxkOxl;;;;;;;;;;;;;;;;;
+                                 x.        ...   .oKo;;;;;;;;;;;;;;;;;;;;;;;
+                                   c;.       .,oOOl;;;;;;;;;;;;;;;;;;;;;
+                                        lxxkOkoc;;;;;;;;;;;;;;;;;;;.
+                                             ';;;;;;;;;;;;;;, 
+
+
+
+
+
+
+                                         ''')
+
+
+cartas = {"RC":("+_________+", "|     Rojo|", "|         |", "|     />  |", "|  </     |", "|         |", "|         |", "+---------+"),  
+
+"ZC":("+_________+", "|     Azul|", "|         |", "|     />  |", "|  </     |", "|         |", "|         |", "+---------+"), 
+
+"AC":("+_________+", "| Amarillo|", "|         |", "|     />  |", "|  </     |", "|         |", "|         |", "+---------+"), 
+
+"VC":("+_________+", "|    Verde|", "|         |", "|     />  |", "|  </     |", "|         |", "|         |", "+---------+"), 
+
+"RB":("+_________+", "|x    Rojo|", "|         |", "|         |", "|    X    |", "|         |", "|        x|", "+---------+"), 
+
+"ZB":("+_________+", "|x    Azul|", "|         |", "|         |", "|    X    |", "|         |", "|        x|", "+---------+"), 
+
+"AB":("+_________+", "|xAmarillo|", "|         |", "|         |", "|    X    |", "|         |", "|        x|", "+---------+"),
+
+"VB":("+_________+", "|x   Verde|", "|         |", "|         |", "|    X    |", "|         |", "|        x|", "+---------+"), 
+
+"R2+":("+_________+", "|+2   Rojo|", "|         |", "|         |", "|    +2   |", "|         |", "|       +2|", "+---------+"), 
+
+"Z2+":("+_________+", "|+2   Azul|", "|         |", "|         |", "|    +2   |", "|         |", "|       +2|", "+---------+"), 
+
+"A2+":("+_________+", "| Amarillo|", "|         |", "|         |", "|    +2   |", "|         |", "|       2+|", "+---------+"), 
+
+"V2+":("+_________+", "|+2  Verde|", "|         |", "|         |", "|    +2   |", "|         |", "|       2+|", "+---------+"), 
+
+"R1":("+_________+", "|1    Rojo|", "|         |", "|         |", "|    1    |", "|         |", "|        1|", "+---------+"), 
+
+"Z1":("+_________+", "|1    Azul|", "|         |", "|         |", "|    1    |", "|         |", "|        1|", "+---------+"), 
+
+"A1":("+_________+", "|1Amarillo|", "|         |", "|         |", "|    1    |", "|         |", "|        1|", "+---------+"), 
+
+"V1":("+_________+", "|1   Verde|", "|         |", "|         |", "|    1    |", "|         |", "|        1|", "+---------+"), 
+
+"R2":("+_________+", "|2    Rojo|", "|         |", "|         |", "|    2    |", "|         |", "|        2|", "+---------+"), 
+
+"Z2":("+_________+", "|2    Azul|", "|         |", "|         |", "|    2    |", "|         |", "|        2|", "+---------+"), 
+
+"A2":("+_________+", "|2Amarillo|", "|         |", "|         |", "|    2    |", "|         |", "|        2|", "+---------+"), 
+
+"V2":("+_________+", "|2   Verde|", "|         |", "|         |", "|    2    |","|         |", "|        2|", "+---------+"), 
+
+"R3":("+_________+", "|3    Rojo|", "|         |", "|         |", "|    3    |", "|         |", "|        3|", "+---------+"), 
+
+"Z3":("+_________+", "|3    Azul|", "|         |", "|         |", "|    3    |", "|         |", "|        3|", "+---------+"), 
+
+"A3":("+_________+", "|3Amarillo|", "|         |", "|         |", "|    3    |", "|         |", "|        3|", "+---------+"), 
+
+"V3":("+_________+", "|3   Verde|", "|         |", "|         |", "|    3    |", "|         |", "|        3|", "+---------+"), 
+
+"R4":("+_________+", "|4    Rojo|", "|         |", "|         |", "|    4    |", "|         |", "|        4|", "+---------+"), 
+
+"Z4":("+_________+", "|4    Azul|", "|         |", "|         |", "|    4    |", "|         |", "|        4|", "+---------+"), 
+
+"A4":("+_________+", "|4Amarillo|", "|         |", "|         |", "|    4    |", "|         |", "|        4|", "+---------+"), 
+
+"V4":("+_________+", "|4   Verde|", "|         |", "|         |", "|    4    |", "|         |", "|        4|", "+---------+"), 
+
+"R5":("+_________+", "|5    Rojo|", "|         |", "|         |", "|    5    |", "|         |", "|        5|", "+---------+"), 
+
+"Z5":("+_________+", "|5    Azul|", "|         |", "|         |", "|    5    |", "|         |", "|        5|", "+---------+"), 
+
+"A5":("+_________+", "|5Amarillo|", "|         |", "|         |", "|    5    |", "|         |", "|        5|", "+---------+"), 
+
+"V5":("+_________+", "|5   Verde|", "|         |", "|         |", "|    5    |", "|         |", "|        5|", "+---------+"), 
+
+"R6":("+_________+", "|6    Rojo|", "|         |", "|         |", "|    6    |", "|         |", "|        6|", "+---------+"), 
+
+"Z6":("+_________+", "|6    Azul|", "|         |", "|         |", "|    6    |", "|         |", "|        6|", "+---------+"), 
+
+"A6":("+_________+", "|6Amarillo|", "|         |", "|         |", "|    6    |", "|         |", "|        6|", "+---------+"), 
+
+"V6":("+_________+", "|6   Verde|", "|         |", "|         |", "|    6    |", "|         |", "|        6|", "+---------+"), 
+
+"R7":("+_________+", "|7    Rojo|", "|         |", "|         |", "|    7    |", "|         |", "|        7|", "+---------+"), 
+
+"Z7":("+_________+", "|7    Azul|", "|         |", "|         |", "|    7    |", "|         |", "|        7|", "+---------+"), 
+
+"A7":("+_________+", "|7Amarillo|", "|         |", "|         |", "|    7    |", "|         |", "|        7|", "+---------+"), 
+
+"Z7":("+_________+", "|7   Verde|", "|         |", "|         |", "|    7    |", "|         |", "|        7|", "+---------+"), 
+
+"R8":("+_________+", "|8    Rojo|", "|         |", "|         |", "|    8    |", "|         |", "|        8|", "+---------+"), 
+
+"Z8":("+_________+", "|8    Azul|", "|         |", "|         |", "|    8    |", "|         |", "|        8|", "+---------+"), 
+
+"A8":("+_________+", "|8Amarillo|", "|         |", "|         |", "|    8    |", "|         |", "|        8|", "+---------+"), 
+
+"V8":("+_________+", "|8   Verde|", "|         |", "|         |", "|    8    |", "|         |", "|        8|", "+---------+"), 
+
+"R9":("+_________+", "|9    Rojo|", "|         |", "|         |", "|    9    |", "|         |", "|        9|", "+---------+"), 
+
+"Z9":("+_________+", "|9    Azul|", "|         |", "|         |", "|    9    |", "|         |", "|        9|", "+---------+"), 
+
+"A9":("+_________+", "|9Amarillo|", "|         |", "|         |", "|    9    |", "|         |", "|        9|", "+---------+"), 
+
+"V9":("+_________+", "|9   Verde|", "|         |","|         |", "|    9    |", "|         |", "|        9|", "+---------+")}
 
 
 ##############################################################################################################
@@ -59,13 +162,6 @@ turno_1 = []
 turno_2 = []
 turno_3 = []
 turno_4 = []
-
-# Identificar los turnos (se va a quitar despues) 
-turno_1.append("turno_1")
-turno_2.append("turno_2")
-turno_3.append("turno_3")
-turno_4.append("turno_4")
-
 
 
 for AddCards in range(8):
@@ -137,7 +233,7 @@ def BusquedaDeCarta(turno, cartaCentro, masoRestante):
             return -1
 
 #funcion de cambio de sentido
-def CambioDeSentido(cartaCentro, turnos):
+def CambioDeSentido(cartaCentro):
     global sentido
     # B en este caso es para identificar si la carta es especial osea si contiene (C, B, 2)
     # Cambio de sentido
@@ -175,9 +271,9 @@ def verificarCartaTirar (masoCartasJugador, masoCentro,cartaTirar):
             elif masoCentro[-1][1] == masoCartasJugador[i][1]:
                 posiblejugadas.append(masoCartasJugador(i))
         return posiblejugadas
-
     else:
-        print("La carta no esta en el maso, favor coloque bien el dato -.-''")
+        print("La carta no esta en el maso, favor coloque bien el dato -.-")
+        return
         
 def VerificarListaDeArrastre():
     global lista_cartas
@@ -188,8 +284,6 @@ def VerificarListaDeArrastre():
         lista_cartas = list(maso)
         maso = []
         maso.append(Centro)
-
-
 
 
 
@@ -205,24 +299,32 @@ while True:
     verificarPosibleJugada = False
 
     while True:
-        if turnos[0][0] == "turno_1":
+        if turnos[0] == turno_1:
             print("Menu del jugador")
             print("Opciones:")
-            print(" 1.Ver Cartas en mi maso")
+            print(" 1.Ver cartas en mi maso")
             print(" 2.Arrastrar")
             print(" 3.Ver la carta del centro")
             print(" 4.Tirar carta")
 
-            entrada = int(input("Eliga la opcion con un entero: "))
+            entrada = int(input("Elija la opcion con un entero: "))
 
 
             if entrada == 1:
-                listaImpresionCartas = turnos[0] 
-                print(*listaImpresionCartas)
+                listaImpresionCartas = turnos[0]
+                print(" ")
+                for i in range(len(cartas[maso[-1]])):
+                    a = ""
+                    for j in listaImpresionCartas:
+                        a += cartas[j][i] + "       "
+                    print(a)
+                    a = ""
+                indices = list(map(str, range(1, len(listaImpresionCartas) + 1)))
+                print("    ", "                 ".join(indices))
+                print(" ")
             elif entrada == 2:
                 verificarPosibleArrastre = False
                 verificarPosibleArrastre = verificarArrastre(turnos[0],maso)
-
                 if verificarPosibleArrastre == True and verificarSiSeArrastro == False:
                     print("Se ha arrastrado una carta")
                     turnos[0].add(lista_cartas.pop(-1))
@@ -233,7 +335,8 @@ while True:
                 print(' CARTAS DEL CENTRO ')
                 print(" ")
                 print(" ")
-                print(maso[-1])
+                for i in cartas[maso[-1]]:
+                    print(i)
                 print(" ")
                 print(" ")
             elif entrada == 4:
@@ -267,10 +370,11 @@ while True:
 
 
     acumulacion  = 0 #acumulador para las cartas de +2
-    print("Turno de la maquina")
-    
+    print("Turno de la maquina \n")
+    for i in cartas[maso[-1]]:
+        print("             ", i)
     BusquedaDeCarta(turnos[0], maso, lista_cartas)
-    CambioDeSentido(maso, turnos)
+    CambioDeSentido(maso)
 
 
 
@@ -282,18 +386,12 @@ while True:
 
     
 
-    if len(turnos[0]) == 0:
+    if len(turnos[0]) == 1:
         break
 
 
-    for k in turnos:
-        print(k)
-
     print(" ")
 
-    print(maso)
-    print(sentido)
-    print(lista_cartas)
     if sentido == True:
         turnos.append(turnos.popleft())
     if sentido == False:
