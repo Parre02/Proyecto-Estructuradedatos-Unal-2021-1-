@@ -157,7 +157,7 @@ maso = []
 random.shuffle(lista_cartas) # O(n*n)
 
 # Turnos
-turnos = deque()
+turnos = deque() 
 turno_1 = []
 turno_2 = []
 turno_3 = []
@@ -177,11 +177,11 @@ turnos.append(turno_2)
 turnos.append(turno_3)
 turnos.append(turno_4)
 
-random.shuffle(turnos)
+random.shuffle(turnos) #O(n*n)
 
 
 # maso agrega una carta aleatoria que es con la que se va a comenzar el juego
-maso.append(lista_cartas.pop())
+maso.append(lista_cartas.pop()) 
 sentido = True
 
 
@@ -190,7 +190,7 @@ sentido = True
 
 
 # Busqueda de carta que pueda servir por turno.
-def BusquedaDeCarta(turno, cartaCentro, masoRestante):
+def BusquedaDeCarta(turno, cartaCentro, masoRestante): ## Esta funcion tiene eficiencia segun notacionBigOh O(n)
     global acumulacion
     encontrada = False
     #se priorisan bloqueos y +2
@@ -204,7 +204,7 @@ def BusquedaDeCarta(turno, cartaCentro, masoRestante):
         if encontrada == False:
             return 1
     
-    if cartaCentro[-1][-1] == '+':
+    elif cartaCentro[-1][-1] == '+':
         acumulacion += 2
         for carta in turno:
             if carta[-1] == cartaCentro[-1][-1]:
@@ -235,7 +235,7 @@ def BusquedaDeCarta(turno, cartaCentro, masoRestante):
             return -1
 
 #funcion de cambio de sentido
-def CambioDeSentido(cartaCentro):
+def CambioDeSentido(cartaCentro): ## Esta funcion tiene eficiencia segun notacionBigOh O(n)
     global sentido
     # B en este caso es para identificar si la carta es especial osea si contiene (C, B, 2)
     # Cambio de sentido
@@ -246,7 +246,7 @@ def CambioDeSentido(cartaCentro):
         sentido = True
 
         
-def VerificarListaDeArrastre():
+def VerificarListaDeArrastre(): ##Esta funcion es O(1)
     global lista_cartas
     global maso
     global Centro
@@ -257,7 +257,7 @@ def VerificarListaDeArrastre():
         maso.append(Centro)
 
 
-while True:
+while True: ## BigOh indefinida ya que tiene en cuenta la probablidad de cartas 
     # Si el maso de cartas restantes se queda en 0 este se reemplaza por el maso de cartas que no estas en posesion de ningun jugador
     if len(lista_cartas) == 0:
         Centro = maso.pop()
