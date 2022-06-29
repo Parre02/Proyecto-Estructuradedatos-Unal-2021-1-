@@ -268,6 +268,13 @@ while True:
     verificarSiSeArrastro = False
     verificarPosibleJugada = False
 
+
+    ##Impresion de la carta del centro
+    print("Turno de la maquina \n")
+    for i in cartas[maso[-1]]:
+        print("             ", i)
+
+
     while True:
         if turnos[0] == turno_1:
             print("Menu del jugador")
@@ -316,11 +323,11 @@ while True:
             break
 
     acumulacion  = 0 #acumulador para las cartas de +2
-    print("Turno de la maquina \n")
-    for i in cartas[maso[-1]]:
-        print("             ", i)
+
     BusquedaDeCarta(turnos[0], maso, lista_cartas)
     CambioDeSentido(maso)
+
+    #Impresion de la carta del centro
 
 
     if len(turnos[0]) == 0:
